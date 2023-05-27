@@ -8,6 +8,7 @@ import android.widget.Button;
 public class MainActivity extends AppCompatActivity {
 
     private Button btnFilmList;
+    private Button btnCustomerList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -16,6 +17,11 @@ public class MainActivity extends AppCompatActivity {
         btnFilmList = findViewById(R.id.btnFilmList);
         btnFilmList.setOnClickListener(view -> {
             startActivity(new Intent(MainActivity.this, FilmListActivity.class));
+        });
+
+        btnFilmList = findViewById(R.id.btnCustomerList);
+        btnFilmList.setOnClickListener(view -> {
+            startActivity(new Intent(MainActivity.this, CustomerListActivity.class));
         });
     }
 }
