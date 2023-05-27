@@ -28,7 +28,14 @@ public class CustomerListActivity extends AppCompatActivity {
         customerRecycleView = findViewById(R.id.list_customer_recycle_view);
         CustomerRecyclerViewAdapter adapter = new CustomerRecyclerViewAdapter(this, customers);
         adapter.setOnDeleteClickListener(i -> {
-            Toast.makeText(CustomerListActivity.this, "Deleted item at " + i, Toast.LENGTH_SHORT).show();
+            ConfirmDeleteDialog confirmDeleteDialog = new ConfirmDeleteDialog();
+            confirmDeleteDialog.setDeleteListener(() -> {
+                Toast.makeText(CustomerListActivity.this, "Deleted item at " + i, Toast.LENGTH_SHORT).show();
+            });
+            confirmDeleteDialog.setCancelListener(() -> {
+                Toast.makeText(CustomerListActivity.this, "Cancel deleted item at " + i, Toast.LENGTH_SHORT).show();
+            });
+            confirmDeleteDialog.show(getSupportFragmentManager(), "fdasdf");
         });
         adapter.setOnEditClickListener(i -> {
             Toast.makeText(CustomerListActivity.this, "Edit item at " + i, Toast.LENGTH_SHORT).show();
@@ -75,6 +82,9 @@ class CustomerRecyclerViewAdapter extends RecyclerView.Adapter<CustomerRecyclerV
         holder.tvName.setText(customers.get(i).getName());
         holder.btnEdit.setOnClickListener(view -> {
             editClickListener.onEditClick(i);
+        });
+        holder.btnDelete.setOnClickListener(view -> {
+            deleteListener.onDeleteClick(i);
         });
     }
 
