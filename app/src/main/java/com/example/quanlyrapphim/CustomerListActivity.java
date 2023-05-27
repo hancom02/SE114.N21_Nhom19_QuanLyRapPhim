@@ -1,6 +1,7 @@
 package com.example.quanlyrapphim;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -19,6 +20,8 @@ public class CustomerListActivity extends AppCompatActivity {
 
     private ArrayList<Customer> customers = new ArrayList<Customer>();
     private RecyclerView customerRecycleView;
+    private ImageButton btnAddCustomer;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +46,10 @@ public class CustomerListActivity extends AppCompatActivity {
         customerRecycleView.setAdapter(adapter);
         customerRecycleView.setLayoutManager(new LinearLayoutManager(this));
 
+        btnAddCustomer = findViewById(R.id.btnAddCustomer);
+        btnAddCustomer.setOnClickListener(view -> {
+            startActivity(new Intent(CustomerListActivity.this, AddCustomerActivity.class));
+        });
     }
 
     void initCustomer() {

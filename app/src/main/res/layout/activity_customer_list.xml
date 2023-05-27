@@ -35,7 +35,7 @@
     </LinearLayout>
 
     <ImageButton
-        android:id="@+id/btnAddFilm"
+        android:id="@+id/btnAddCustomer"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_marginEnd="16dp"
