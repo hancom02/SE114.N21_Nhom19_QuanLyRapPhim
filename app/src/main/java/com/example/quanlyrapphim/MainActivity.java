@@ -9,6 +9,7 @@ public class MainActivity extends AppCompatActivity {
 
     private Button btnFilmList;
     private Button btnCustomerList;
+    private Button btnStaffList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,9 +20,14 @@ public class MainActivity extends AppCompatActivity {
             startActivity(new Intent(MainActivity.this, FilmListActivity.class));
         });
 
-        btnFilmList = findViewById(R.id.btnCustomerList);
-        btnFilmList.setOnClickListener(view -> {
+        btnCustomerList = findViewById(R.id.btnCustomerList);
+        btnCustomerList.setOnClickListener(view -> {
             startActivity(new Intent(MainActivity.this, CustomerListActivity.class));
+        });
+
+        btnStaffList = findViewById(R.id.btnStaffList);
+        btnStaffList.setOnClickListener(view -> {
+            startActivity(new Intent(MainActivity.this, StaffListActivity.class));
         });
     }
 }
