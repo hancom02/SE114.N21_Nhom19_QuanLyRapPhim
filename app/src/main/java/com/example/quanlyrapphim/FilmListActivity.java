@@ -1,6 +1,8 @@
 package com.example.quanlyrapphim;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -23,6 +25,7 @@ public class FilmListActivity extends AppCompatActivity {
 
     private ArrayList<Film> films = new ArrayList<>();
     private RecyclerView filmRecyclerView;
+    private ImageButton btnAddFilm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +34,7 @@ public class FilmListActivity extends AppCompatActivity {
         initFilms();
 
         filmRecyclerView = findViewById(R.id.list_film_recycle_view);
+        btnAddFilm = findViewById(R.id.btnAddFilm);
 
         FilmRecyclerViewAdapter adapter = new FilmRecyclerViewAdapter(this, films);
         adapter.setOnDeleteClickListener(i -> {
@@ -41,6 +45,10 @@ public class FilmListActivity extends AppCompatActivity {
         });
         filmRecyclerView.setAdapter(adapter);
         filmRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        btnAddFilm.setOnClickListener(view -> {
+            startActivity(new Intent(FilmListActivity.this, AddFilmActivity.class));
+        });
 
     }
 
