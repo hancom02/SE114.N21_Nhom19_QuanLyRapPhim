@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/ticketScreenFragment"
+        android:icon="@drawable/delete_primary_24"
+        android:title="Vé"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/customerScreenGroup"
+        android:icon="@drawable/edit_primary_24"
+        android:title="Khách hàng"
+        app:showAsAction="ifRoom" />
+</menu>

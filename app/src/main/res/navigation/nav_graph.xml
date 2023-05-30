@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/ticketScreenFragment">
+
+    <fragment
+        android:id="@+id/ticketScreenFragment"
+        android:name="com.example.quanlyrapphim.TicketScreenFragment"
+        android:label="Bán vé"
+        tools:layout="@layout/fragment_ticket_screen" />
+    <navigation
+        android:id="@+id/customerScreenGroup"
+        app:startDestination="@id/customerScreenFragment">
+        <fragment
+            android:id="@+id/addCustomerFragment"
+            android:name="com.example.quanlyrapphim.AddCustomerFragment"
+            android:label="Thêm khách hàng"
+            tools:layout="@layout/fragment_add_customer" >
+            <action
+                android:id="@+id/action_addCustomerFragment_to_customerScreenFragment"
+                app:destination="@id/customerScreenFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/customerScreenFragment"
+            android:name="com.example.quanlyrapphim.CustomerScreenFragment"
+            android:label="Danh sách khách hàng"
+            tools:layout="@layout/fragment_customer_screen">
+            <action
+                android:id="@+id/action_customerScreenFragment_to_addCustomerFragment"
+                app:destination="@id/addCustomerFragment" />
+        </fragment>
+    </navigation>
+</navigation>
