@@ -11,25 +11,29 @@
         android:label="Bán vé"
         tools:layout="@layout/fragment_ticket_screen" />
     <navigation
-        android:id="@+id/customerScreenGroup"
-        app:startDestination="@id/customerScreenFragment">
+        android:id="@+id/filmScreenGroup"
+        app:startDestination="@id/filmScreenFragment">
         <fragment
-            android:id="@+id/addCustomerFragment"
-            android:name="com.example.quanlyrapphim.AddCustomerFragment"
-            android:label="Thêm khách hàng"
-            tools:layout="@layout/fragment_add_customer" >
+            android:id="@+id/filmScreenFragment"
+            android:name="com.example.quanlyrapphim.FilmScreenFragment"
+            android:label="Danh sách phim"
+            tools:layout="@layout/fragment_film_screen" >
             <action
-                android:id="@+id/action_addCustomerFragment_to_customerScreenFragment"
-                app:destination="@id/customerScreenFragment" />
+                android:id="@+id/action_filmScreenFragment_to_addFilmScreenFragment"
+                app:destination="@id/addFilmScreenFragment" />
         </fragment>
         <fragment
-            android:id="@+id/customerScreenFragment"
-            android:name="com.example.quanlyrapphim.CustomerScreenFragment"
-            android:label="Danh sách khách hàng"
-            tools:layout="@layout/fragment_customer_screen">
-            <action
-                android:id="@+id/action_customerScreenFragment_to_addCustomerFragment"
-                app:destination="@id/addCustomerFragment" />
-        </fragment>
+            android:id="@+id/addFilmScreenFragment"
+            android:name="com.example.quanlyrapphim.AddFilmScreenFragment"
+            android:label="Thêm phim"
+            tools:layout="@layout/fragment_add_film_screen" />
+    </navigation>
+    <navigation android:id="@+id/employeeScreenGroup"
+        app:startDestination="@id/employeeScreenFragment">
+        <fragment
+            android:id="@+id/employeeScreenFragment"
+            android:name="com.example.quanlyrapphim.EmployeeScreenFragment"
+            android:label="Nhân viên"
+            tools:layout="@layout/fragment_employee_screen" />
     </navigation>
 </navigation>

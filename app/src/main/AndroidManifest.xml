@@ -28,18 +28,6 @@
         <activity
             android:name=".StaffListActivity"
             android:exported="false" />
-        <activity
-            android:name=".AddCustomerActivity"
-            android:exported="false" />
-        <activity
-            android:name=".CustomerListActivity"
-            android:exported="false" />
-        <activity
-            android:name=".AddFilmActivity"
-            android:exported="false" />
-        <activity
-            android:name=".FilmListActivity"
-            android:exported="false" />
     </application>
 
 </manifest>

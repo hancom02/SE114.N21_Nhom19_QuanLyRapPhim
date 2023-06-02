@@ -7,8 +7,13 @@
         android:title="Vé"
         app:showAsAction="ifRoom" />
     <item
-        android:id="@+id/customerScreenGroup"
+        android:id="@+id/filmScreenGroup"
         android:icon="@drawable/edit_primary_24"
-        android:title="Khách hàng"
+        android:title="Phim"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/employeeScreenGroup"
+        android:icon="@drawable/edit_primary_24"
+        android:title="Nhân viên"
         app:showAsAction="ifRoom" />
 </menu>

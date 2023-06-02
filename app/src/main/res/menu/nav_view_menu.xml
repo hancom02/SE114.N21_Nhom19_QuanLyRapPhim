@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group
+        android:id="@+id/nav_view_group_default"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/ticketScreenFragment"
+            android:icon="@drawable/delete_primary_24"
+            android:title="Vé" />
+        <item
+            android:id="@+id/filmScreenGroup"
+            android:icon="@drawable/delete_primary_24"
+            android:title="Phim" />
+        <item
+            android:id="@+id/employeeScreenGroup"
+            android:icon="@drawable/delete_primary_24"
+            android:title="Nhân viên" />
+    </group>
+    <group
+        android:id="@+id/nav_view_group_admin"
+        android:checkableBehavior="single">
+    </group>
+</menu>

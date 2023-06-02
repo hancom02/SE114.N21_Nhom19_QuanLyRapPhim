@@ -1,4 +1,4 @@
-package com.example.quanlyrapphim;
+package com.example.quanlyrapphim.utils;
 
 
 import android.app.Dialog;
@@ -41,11 +41,11 @@ public class ConfirmDeleteDialog extends DialogFragment {
         cancelListener = listener;
     }
 
-    interface OnDeleteListener {
+    public interface OnDeleteListener {
         void onDeleteClick();
     }
 
-    interface OnCancelListener {
+    public interface OnCancelListener {
         void onCancelClick();
     }
 }

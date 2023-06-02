@@ -8,7 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class AddCustomerFragment extends Fragment {
+public class AddFilmScreenFragment extends Fragment {
+
 
 
     @Override
@@ -20,6 +21,6 @@ public class AddCustomerFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_add_customer, container, false);
+        return inflater.inflate(R.layout.fragment_add_film_screen, container, false);
     }
 }
