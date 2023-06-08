@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "149102876326",
+    "project_id": "quan-ly-rap-phim",
+    "storage_bucket": "quan-ly-rap-phim.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:149102876326:android:b3e408b9cc247d59ddc667",
+        "android_client_info": {
+          "package_name": "com.example.quanlyrapphim"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "149102876326-66gp71s4igbm952hn0qopfdgr4m2a05i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDjDkdQ3tWNYZX6y7qjI4YvYYlJYQCw_eg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "149102876326-66gp71s4igbm952hn0qopfdgr4m2a05i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
