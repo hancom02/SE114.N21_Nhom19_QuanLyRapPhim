@@ -49,7 +49,7 @@
             app:mbn_countTextColor="#ffffff"
             app:mbn_defaultIconColor="#C0B5D7"
             app:mbn_rippleColor="#2f424242"
-            app:mbn_selectedIconColor="@color/black"
+            app:mbn_selectedIconColor="#6247AA"
             app:mbn_shadowColor="#1f212121" />
 
     </RelativeLayout>

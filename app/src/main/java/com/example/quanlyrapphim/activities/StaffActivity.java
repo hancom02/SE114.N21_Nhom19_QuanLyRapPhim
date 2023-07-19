@@ -32,7 +32,9 @@ public class StaffActivity extends AppCompatActivity {
         bottomNavigation.show(1, true);
 
         bottomNavigation.add(new MeowBottomNavigation.Model(1, R.drawable.property_1_ticket));
-        bottomNavigation.add(new MeowBottomNavigation.Model(2, R.drawable.property_1_user));
+        bottomNavigation.add(new MeowBottomNavigation.Model(2, R.drawable.property_1_customer));
+        bottomNavigation.add(new MeowBottomNavigation.Model(3, R.drawable.property_1_statistic));
+        bottomNavigation.add(new MeowBottomNavigation.Model(4, R.drawable.property_1_user));
 
 
 
@@ -44,6 +46,10 @@ public class StaffActivity extends AppCompatActivity {
                         break;
                     case 2:
                         break;
+                    case 3:
+                        break;
+                    case 4:
+                        break;
                 }
                 return null;
             }
@@ -52,7 +58,7 @@ public class StaffActivity extends AppCompatActivity {
         bottomNavigation.setOnShowListener(new Function1<MeowBottomNavigation.Model, Unit>() {
             @Override
             public Unit invoke(MeowBottomNavigation.Model model) {
-                Fragment fragment = null;
+                Fragment fragment = new SelectMovieFragment();
 
                 switch (model.getId()){
                     case 1:
@@ -61,22 +67,19 @@ public class StaffActivity extends AppCompatActivity {
                     case 2:
                         fragment = new BookingTicketFragment();
                         break;
+                    case 3:
+                        fragment = new StatisticTicketFragment();
+                        break;
+                    case 4:
+                        fragment = new ProfileFragment();
+                        break;
                 }
                 loadFragment(fragment);
                 return null;
             }
         });
         bottomNavigation.show(2,true);
-//        bottomNavigation.setOnShowListener(new Function1<MeowBottomNavigation.Model, Unit>() {
-//            @Override
-//            public Unit invoke(MeowBottomNavigation.Model model) {
-//                // YOUR CODES
-//                switch (model.getId()){
-//
-//                }
-//                return null;
-//            }
-//        });
+
     }
     private void loadFragment(Fragment fragment) {
         getSupportFragmentManager()
