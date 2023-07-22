@@ -25,6 +25,7 @@ public class FilmRecyclerViewAdapter extends RecyclerView.Adapter<FilmRecyclerVi
     private ArrayList<Film> films;
     private RecyclerViewItemEventListener deleteClickListener;
     private RecyclerViewItemEventListener editClickListener;
+    private RecyclerViewItemEventListener clickListener;
 
     public FilmRecyclerViewAdapter(Context context, ArrayList<Film> films) {
         this.context = context;
@@ -50,6 +51,9 @@ public class FilmRecyclerViewAdapter extends RecyclerView.Adapter<FilmRecyclerVi
         holder.btnEdit.setOnClickListener(view -> {
             editClickListener.onItemEvent(i);
         });
+        holder.card.setOnClickListener(view -> {
+            clickListener.onItemEvent(i);
+        });
     }
 
     @Override
@@ -64,12 +68,16 @@ public class FilmRecyclerViewAdapter extends RecyclerView.Adapter<FilmRecyclerVi
     public void setOnEditClickListener(RecyclerViewItemEventListener listener) {
         editClickListener = listener;
     }
+    public void setOnClickListener(RecyclerViewItemEventListener listener) {
+        clickListener = listener;
+    }
 
     class MyViewHolder extends RecyclerView.ViewHolder {
         TextView tvName;
         ImageView imgvImage;
         MaterialButton btnDelete;
         MaterialButton btnEdit;
+        View card;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -77,6 +85,7 @@ public class FilmRecyclerViewAdapter extends RecyclerView.Adapter<FilmRecyclerVi
             imgvImage = itemView.findViewById(R.id.film_card_image);
             btnDelete = itemView.findViewById(R.id.film_card_btn_delete);
             btnEdit = itemView.findViewById(R.id.film_card_btn_edit);
+            card = itemView;
         }
     }
 

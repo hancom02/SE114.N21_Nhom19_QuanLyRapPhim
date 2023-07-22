@@ -51,6 +51,11 @@ public class FilmScreenFragment extends Fragment {
         adapter.setOnEditClickListener(i -> {
             Toast.makeText(getActivity(), "Edit item at " + i, Toast.LENGTH_SHORT).show();
         });
+        adapter.setOnClickListener(i -> {
+            Bundle bundle = new Bundle();
+            bundle.putString("filmName", films.get(i).getName());
+            Navigation.findNavController(view).navigate(R.id.action_filmScreenFragment_to_filmDetailScreenFragment, bundle);
+        });
         filmRecyclerView.setAdapter(adapter);
         filmRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
