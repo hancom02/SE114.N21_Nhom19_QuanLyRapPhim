@@ -51,7 +51,6 @@ public class EditFilmScreenFragment extends Fragment {
     private ImageView imvImage;
     private MaterialButton btnRemoveImage;
     private MaterialButton btnUpdate;
-    private Date pickedReleaseDate; // store date from picker
     private MaterialDatePicker datePicker = MaterialDatePicker.Builder.datePicker().setTitleText("Ngày công chiếu").build();
     private LinearLayout loading;
     
@@ -61,6 +60,10 @@ public class EditFilmScreenFragment extends Fragment {
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private FirebaseStorage storage = FirebaseStorage.getInstance();
     private Uri filePath = null;
+    private boolean isImageModified;
+    private Date pickedReleaseDate; // store date from picker
+
+    private Film film;
     
 
     @Override
@@ -87,6 +90,7 @@ public class EditFilmScreenFragment extends Fragment {
                                 if (imvImage != null) {
                                     imvImage.setImageURI(selectedImageUri);
                                     btnRemoveImage.setVisibility(View.VISIBLE);
+                                    isImageModified = true;
                                 }
                             }
                         }
@@ -119,6 +123,28 @@ public class EditFilmScreenFragment extends Fragment {
         btnRemoveImage = view.findViewById(R.id.edit_film_screen_btn_remove_image);
         loading = view.findViewById(R.id.edit_film_screen_loading);
 
+        // Show date picker
+        inputDateRelease.setOnClickListener(v -> {
+            if (!datePicker.isAdded()) {
+                datePicker.show(getParentFragmentManager(), "DATE_PICKER");
+            }
+            datePicker.addOnPositiveButtonClickListener(selection -> {
+                        inputDateRelease.setText(datePicker.getHeaderText());
+                        pickedReleaseDate = new Date((Long) selection);
+                    }
+            );
+        });
+
+        // Show image picker activity
+        imvImage.setOnClickListener(v -> {
+            this.chooseImage();
+        });
+
+        // Remove image
+        btnRemoveImage.setOnClickListener(v -> {
+            this.removeImage();
+        });
+
         // Load data to field
         DocumentReference docRef = db.collection("films").document(argFilmId);
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -128,7 +154,7 @@ public class EditFilmScreenFragment extends Fragment {
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
                         Log.d("FILM_DETAIL", "DocumentSnapshot data: " + document.getData());
-                        Film film = document.toObject(Film.class);
+                        film = document.toObject(Film.class);
                         inputName.setText(film.getName());
                         inputCast.setText(film.getCast());
                         inputContent.setText(film.getContent());
@@ -148,6 +174,9 @@ public class EditFilmScreenFragment extends Fragment {
                 }
             }
         });
+
+
+
         
         
     }

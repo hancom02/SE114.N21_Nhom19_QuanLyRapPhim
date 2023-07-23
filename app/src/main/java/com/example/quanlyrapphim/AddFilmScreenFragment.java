@@ -113,7 +113,7 @@ public class AddFilmScreenFragment extends Fragment {
     private ImageView imvImage;
     private MaterialButton btnRemoveImage;
     private MaterialButton btnAdd;
-    private Date pickedReleaseDate; // store date from picker
+
     private MaterialDatePicker datePicker = MaterialDatePicker.Builder.datePicker().setTitleText("Ngày công chiếu").build();
     private LinearLayout loading;
 
@@ -123,6 +123,7 @@ public class AddFilmScreenFragment extends Fragment {
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private FirebaseStorage storage = FirebaseStorage.getInstance();
     private Uri filePath = null;
+    private Date pickedReleaseDate; // store date from picker
 
 
 
@@ -201,6 +202,19 @@ public class AddFilmScreenFragment extends Fragment {
 
         // handle create film
         btnAdd.setOnClickListener(v -> {
+
+            if (
+                    inputName.getText().toString() == "" ||
+                    inputType.getText().toString() == "" ||
+                    inputCountry.getText().toString() == "" ||
+                    inputCast.getText().toString() == "" ||
+                    inputContent.getText().toString() == "" ||
+                    pickedReleaseDate == null || filePath == null
+            ) {
+                Toast.makeText(getActivity(), "Vui lòng nhập đầy đủ thông tin!", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
 
             CreateFilm createFilm = new CreateFilm(
                     inputName.getText().toString(),
