@@ -23,6 +23,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -55,6 +56,7 @@ public class FilmScreenFragment extends Fragment {
 
         // Get films from db
         db.collection("films")
+                .orderBy("createdAt", Query.Direction.DESCENDING)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -67,6 +69,7 @@ public class FilmScreenFragment extends Fragment {
                                 film.setId(document.getId());
                                 films.add(film);
                             }
+
 
                             // Set to view
                             FilmRecyclerViewAdapter adapter = new FilmRecyclerViewAdapter(getActivity(), films);
