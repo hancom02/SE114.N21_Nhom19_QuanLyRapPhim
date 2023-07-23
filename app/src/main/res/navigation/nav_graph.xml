@@ -24,6 +24,9 @@
             <action
                 android:id="@+id/action_filmScreenFragment_to_filmDetailScreenFragment"
                 app:destination="@id/filmDetailScreenFragment" />
+            <action
+                android:id="@+id/action_filmScreenFragment_to_editFilmScreenFragment"
+                app:destination="@id/editFilmScreenFragment" />
         </fragment>
         <fragment
             android:id="@+id/addFilmScreenFragment"
@@ -35,6 +38,11 @@
             android:name="com.example.quanlyrapphim.FilmDetailScreenFragment"
             android:label="Chi tiết phim"
             tools:layout="@layout/fragment_film_detail_screen" />
+        <fragment
+            android:id="@+id/editFilmScreenFragment"
+            android:name="com.example.quanlyrapphim.EditFilmScreenFragment"
+            android:label="Chỉnh sửa phim"
+            tools:layout="@layout/fragment_edit_film_screen" />
     </navigation>
     <navigation android:id="@+id/employeeScreenGroup"
         app:startDestination="@id/employeeScreenFragment">

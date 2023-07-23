@@ -77,7 +77,10 @@ public class FilmScreenFragment extends Fragment {
                                 Toast.makeText(getActivity(), "Deleted item at " + i, Toast.LENGTH_SHORT).show();
                             });
                             adapter.setOnEditClickListener(i -> {
-                                Toast.makeText(getActivity(), "Edit item at " + i, Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(getActivity(), "Edit item at " + i, Toast.LENGTH_SHORT).show();
+                                Bundle bundle = new Bundle();
+                                bundle.putString("filmId", films.get(i).getId());
+                                Navigation.findNavController(view).navigate(R.id.action_filmScreenFragment_to_editFilmScreenFragment, bundle);
                             });
                             adapter.setOnClickListener(i -> {
                                 Bundle bundle = new Bundle();
