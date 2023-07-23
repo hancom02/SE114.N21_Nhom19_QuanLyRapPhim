@@ -1,6 +1,7 @@
 package com.example.quanlyrapphim.fragments;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,56 +16,153 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.quanlyrapphim.R;
-import com.example.quanlyrapphim.adapters.FilmRecyclerViewAdapter;
+import com.example.quanlyrapphim.adapters.ProfileRecyclerViewAdapter;
+import com.example.quanlyrapphim.adapters.TextDropdownRecyclerViewAdapter;
+import com.example.quanlyrapphim.adapters.DropdownTextRecyclerViewAdapter;
+import com.example.quanlyrapphim.adapters.TextInputRecyclerViewAdapter;
+import com.example.quanlyrapphim.models.Field;
 import com.example.quanlyrapphim.models.Film;
+import com.example.quanlyrapphim.models.TextDropdownField;
+import com.example.quanlyrapphim.models.TextInputField;
+import com.example.quanlyrapphim.models.DropdownTextField;
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class BookingTicketFragment extends Fragment {
-    private ArrayList<Film> films = new ArrayList<>();
-    private RecyclerView filmRecyclerView;
-    private FloatingActionButton btnAddFilm;
+
+    private List<Integer> recyclerViewIds = Arrays.asList(
+            R.id.booking_ticket_text_input_recycler_view,
+            R.id.booking_ticket_text_dropdown_recycler_view,
+            R.id.booking_ticket_dropdown_text_recycler_view
+    );
+
+    private int currentRecyclerViewIndex = 0;
+
+
+    private void setupRecyclerViewScrollListener(RecyclerView recyclerView) {
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                if (!recyclerView.canScrollVertically(1)) {
+                    // RecyclerView cuộn hết, hiển thị RecyclerView tiếp theo
+                    showNextRecyclerView();
+                }
+            }
+        });
+    }
+
+    private void showNextRecyclerView() {
+//        if (currentRecyclerViewIndex < recyclerViewIds.size() - 1) {
+//            RecyclerView currentRecyclerView = view.findViewById(recyclerViewIds.get(currentRecyclerViewIndex));
+//            currentRecyclerView.setVisibility(View.GONE);
+//
+//            currentRecyclerViewIndex++;
+//
+//            RecyclerView nextRecyclerView = view.findViewById(recyclerViewIds.get(currentRecyclerViewIndex));
+//            nextRecyclerView.setVisibility(View.VISIBLE);
+//
+//            setupRecyclerViewScrollListener(nextRecyclerView);
+//        }
+    }
+
+
+
+
+
+
+
+
+
+    private ArrayList<TextInputField> textInputFields = new ArrayList<>();
+    private ArrayList<TextDropdownField> textDropdownFields = new ArrayList<>();
+    private ArrayList<DropdownTextField> dropdownTextFields = new ArrayList<>();
+
+
+    private RecyclerView textInputRecyclerView;
+    private RecyclerView textDropdownRecyclerView;
+    private RecyclerView dropdownTextRecyclerView;
+
+
+
+    private TextInputRecyclerViewAdapter textInputAdapter;
+    private TextDropdownRecyclerViewAdapter textDropdownAdapter;
+    private TextDropdownRecyclerViewAdapter dropdownTextAdapter;
+
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        initFilms();
+        initFields();
+
+
+        for (int i = 0; i < recyclerViewIds.size(); i++) {
+            if (i != currentRecyclerViewIndex) {
+//                RecyclerView hiddenRecyclerView = view.findViewById(recyclerViewIds.get(i));
+//                hiddenRecyclerView.setVisibility(View.GONE);
+            }
+        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_booking_ticket, container, false);
+//        return inflater.inflate(R.layout.fragment_booking_ticket, container, false);
+
+        View view = inflater.inflate(R.layout.fragment_booking_ticket, container, false);
+        textInputRecyclerView = view.findViewById(R.id.booking_ticket_text_input_recycler_view);
+        textDropdownRecyclerView = view.findViewById(R.id.booking_ticket_text_dropdown_recycler_view);
+        dropdownTextRecyclerView = view.findViewById(R.id.booking_ticket_dropdown_text_recycler_view);
+        return view;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        initFields();
+//        initFieldsTextDropdown();
         super.onViewCreated(view, savedInstanceState);
-        filmRecyclerView = view.findViewById(R.id.film_recycle_view);
-        btnAddFilm = view.findViewById(R.id.film_screen_btn_add_film);
+        textInputRecyclerView = view.findViewById(R.id.booking_ticket_text_input_recycler_view);
+        textDropdownRecyclerView = view.findViewById(R.id.booking_ticket_text_dropdown_recycler_view);
+        dropdownTextRecyclerView = view.findViewById(R.id.booking_ticket_dropdown_text_recycler_view);
 
-        FilmRecyclerViewAdapter adapter = new FilmRecyclerViewAdapter(getActivity(), films);
-        adapter.setOnDeleteClickListener(i -> {
-            Toast.makeText(getActivity(), "Deleted item at " + i, Toast.LENGTH_SHORT).show();
-        });
-        adapter.setOnEditClickListener(i -> {
-            Toast.makeText(getActivity(), "Edit item at " + i, Toast.LENGTH_SHORT).show();
-        });
-        filmRecyclerView.setAdapter(adapter);
-        filmRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        btnAddFilm.setOnClickListener(v -> {
-            Navigation.findNavController(view).navigate(R.id.action_filmScreenFragment_to_addFilmScreenFragment);
-        });
+
+        TextInputRecyclerViewAdapter adapter = new TextInputRecyclerViewAdapter(getActivity(), textInputFields);
+        TextDropdownRecyclerViewAdapter tDadapter = new TextDropdownRecyclerViewAdapter(getActivity(), textDropdownFields);
+        DropdownTextRecyclerViewAdapter dTadapter = new DropdownTextRecyclerViewAdapter(getActivity(), dropdownTextFields);
+
+        textInputRecyclerView.setAdapter(adapter);
+        textDropdownRecyclerView.setAdapter(tDadapter);
+        dropdownTextRecyclerView.setAdapter(dTadapter);
+
+        textInputRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        textDropdownRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        dropdownTextRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
     }
 
-    private void initFilms() {
-        films.add(new Film("Midnight Whispers", "https://images.unsplash.com/photo-1590179068383-b9c69aacebd3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8ZmlsbSUyMHBvc3RlcnxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60"));
-        films.add(new Film("Shattered Dreams of Yesterday", "https://images.unsplash.com/photo-1578655858279-e17d055eafd0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fGZpbG0lMjBwaG90b2dyYXBoeXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60"));
-        films.add(new Film("Echoes of Forgotten Memories - I don't want to code in java!", "https://images.unsplash.com/photo-1543487945-139a97f387d5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8cG9zdGVyfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60"));
-        films.add(new Film("The Enigma's Hidden Legacy", "https://images.unsplash.com/photo-1583407723467-9b2d22504831?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fHBvc3RlcnxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60"));
-        films.add(new Film("Serendipity's Dance of Fate", "https://plus.unsplash.com/premium_photo-1668051042204-038187cac123?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8YW5pbWV8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60"));
+    private void initFields() {
+
+
+        textDropdownFields.add(new TextDropdownField("Suat chieu", "14h00 - 15h45"));
+//        textDropdownFields.add(new TextDropdownField("Ghe", "H1, H2"));
+
+        textInputFields.add(new TextInputField("Ma ve", "Bich Huyen"));
+//        textInputFields.add(new TextInputField("Phim", "Doraemon"));
+
+        dropdownTextFields.add(new DropdownTextField("Email", "a.@gmail.com"));
+
+//        adapter.notifyDataSetChanged();
+    }
+    private void initFieldsTextDropdown() {
+//        textDropdownFields.add(new TextDropdownField("Email", "a.@gmail.com"));
+
+
+//        adapter.notifyDataSetChanged();
     }
 }

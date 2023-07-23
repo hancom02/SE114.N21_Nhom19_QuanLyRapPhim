@@ -1,70 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/bg"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".fragments.BookingTicketFragment">
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    app:cardCornerRadius="0dp">
 
-
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:fillViewport="true"
+        tools:ignore="MissingConstraints">
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="match_parent">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:padding="16dp"
                 android:orientation="vertical">
-                <LinearLayout
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/booking_ticket_text_input_recycler_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-                    <com.google.android.material.textfield.TextInputLayout
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        android:id="@+id/textField"
-                        android:layout_width="match_parent"
+                    android:layout_marginTop="50dp"
+                    android:layout_marginBottom="1dp"
+                    android:background="@color/bg"
+                    android:padding="16dp"
+                    tools:ignore="MissingConstraints"
+
+                    />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/booking_ticket_text_dropdown_recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/bg"
+                    app:layout_constraintTop_toBottomOf="@id/booking_ticket_text_input_recycler_view"
+                    app:layout_constraintBottom_toTopOf="@id/booking_ticket_dropdown_text_recycler_view"
+                    android:layout_marginBottom="9dp"
+
+              />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/booking_ticket_dropdown_text_recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/bg"
+                  />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    app:layout_constraintTop_toBottomOf="@id/booking_ticket_text_dropdown_recycler_view"
+                    android:layout_marginTop="16dp"
+                    android:gravity="bottom"
+                    android:orientation="horizontal"
+               >
+
+                    <Button
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:hint="Tìm kiếm"
-                        app:startIconDrawable="@drawable/baseline_search_24"
-                        >
+                        android:layout_marginEnd="50dp"
+                        android:background="@drawable/text_border"
+                        android:text="Huy"
 
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:padding="0dp"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            />
+                        ></Button>
 
-                    </com.google.android.material.textfield.TextInputLayout>
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/text_border"
+                        android:text="In"
 
-
+                        ></Button>
                 </LinearLayout>
             </LinearLayout>
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/film_recycle_view"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:padding="16dp"/>
-
         </LinearLayout>
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/film_screen_btn_add_film"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|right"
-            android:layout_margin="16dp"
-            app:tint="@color/white"
-            app:backgroundTint="@color/primary"
-            android:contentDescription="Thêm khách hàng"
-            app:srcCompat="@drawable/add_white_24"/>
+    </androidx.core.widget.NestedScrollView>
 
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-</FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -12,27 +12,13 @@
         android:id="@+id/fieldName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="0.3"
+        android:layout_weight="0.65"
         android:background="@drawable/text_border"
         android:padding="10dp"
         android:text="Tong rap"
         android:textColor="@color/black"
         android:textAlignment="center"></TextView>
 
-    <EditText
-        android:id="@+id/fieldContent"
-        android:layout_width="0dp"
-
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20px"
-        android:layout_weight="0.65"
-        android:background="@drawable/text_border"
-        android:padding="8dp"
-        android:textColor="@color/black"
-
-        android:text="100 ve"
-        android:layout_marginTop="1dp"
-        android:textAlignment="center"></EditText>
 
 
 </LinearLayout>
