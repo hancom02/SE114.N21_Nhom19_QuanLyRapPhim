@@ -16,7 +16,7 @@ public class ConfirmDeleteDialog extends DialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         // Use the Builder class for convenient dialog construction
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setMessage("Bạn có chắc chăn muốn xoá?")
+        builder.setMessage("Bạn có chắc chắn muốn xoá?")
                 .setPositiveButton("Xoá", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         if (deleteListener != null)
