@@ -16,7 +16,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.quanlyrapphim.models.Film;
+import com.example.quanlyrapphim.utils.ConfirmDeleteDialog;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
 import com.google.firebase.firestore.DocumentReference;
@@ -28,7 +31,10 @@ import java.text.SimpleDateFormat;
 
 public class FilmDetailScreenFragment extends Fragment {
 
+    // ARG
     private String argFilmId;
+
+    // VIEW
     private ImageView imvImage;
     private TextView tvName;
     private TextView tvType;
@@ -38,8 +44,12 @@ public class FilmDetailScreenFragment extends Fragment {
     private TextView tvContent;
     private MaterialButton btnEdit;
     private MaterialButton btnDelete;
+    ConfirmDeleteDialog confirmDeleteDialog = new ConfirmDeleteDialog();
+
+    // OTHER
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -108,5 +118,38 @@ public class FilmDetailScreenFragment extends Fragment {
                 Navigation.findNavController(view).navigate(R.id.editFilmScreenFragment, bundle);
             }
         });
+
+        btnDelete.setOnClickListener(v -> {
+            confirmDeleteDialog.setDeleteListener(new ConfirmDeleteDialog.OnDeleteListener() {
+                @Override
+                public void onDeleteClick() {
+
+                    // HANDLE DELETE FILM
+                    db.collection("films").document(argFilmId)
+                            .delete()
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    Toast.makeText(getActivity(), "Xoá phim thành công", Toast.LENGTH_SHORT).show();
+                                    Navigation.findNavController(view).navigate(R.id.filmScreenFragment);
+                                }
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(getActivity(), "Có lỗi xảy ra!", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+
+
+                }
+            });
+
+            if (!confirmDeleteDialog.isAdded()) {
+                confirmDeleteDialog.show(getParentFragmentManager(), "DeleteDialog");
+            }
+        });
+
+
     }
 }
