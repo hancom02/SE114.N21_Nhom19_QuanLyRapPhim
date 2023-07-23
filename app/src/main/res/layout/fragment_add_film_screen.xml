@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context=".AddFilmScreenFragment">
 
     <ScrollView
@@ -77,7 +76,7 @@
                     android:id="@+id/add_film_screen_input_cast"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="date" />
+                    />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -180,5 +179,19 @@
         </LinearLayout>
     </ScrollView>
 
-
-</LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:background="#aaffffff"
+        android:id="@+id/add_film_screen_loading"
+        android:visibility="gone"
+        android:clickable="true"
+        >
+        <com.google.android.material.progressindicator.CircularProgressIndicator
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            />
+    </LinearLayout>
+</RelativeLayout>

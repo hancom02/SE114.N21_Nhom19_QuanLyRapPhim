@@ -9,6 +9,7 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +17,14 @@ import android.widget.Toast;
 
 import com.example.quanlyrapphim.adapters.FilmRecyclerViewAdapter;
 import com.example.quanlyrapphim.models.Film;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
@@ -24,11 +32,11 @@ public class FilmScreenFragment extends Fragment {
     private ArrayList<Film> films = new ArrayList<>();
     private RecyclerView filmRecyclerView;
     private FloatingActionButton btnAddFilm;
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        initFilms();
     }
 
     @Override
@@ -44,31 +52,49 @@ public class FilmScreenFragment extends Fragment {
         filmRecyclerView = view.findViewById(R.id.film_recycle_view);
         btnAddFilm = view.findViewById(R.id.film_screen_btn_add_film);
 
-        FilmRecyclerViewAdapter adapter = new FilmRecyclerViewAdapter(getActivity(), films);
-        adapter.setOnDeleteClickListener(i -> {
-            Toast.makeText(getActivity(), "Deleted item at " + i, Toast.LENGTH_SHORT).show();
-        });
-        adapter.setOnEditClickListener(i -> {
-            Toast.makeText(getActivity(), "Edit item at " + i, Toast.LENGTH_SHORT).show();
-        });
-        adapter.setOnClickListener(i -> {
-            Bundle bundle = new Bundle();
-            bundle.putString("filmName", films.get(i).getName());
-            Navigation.findNavController(view).navigate(R.id.action_filmScreenFragment_to_filmDetailScreenFragment, bundle);
-        });
-        filmRecyclerView.setAdapter(adapter);
-        filmRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        // Get films from db
+        db.collection("films")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            films = new ArrayList<>();
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                //Log.d("GET_FILM", document.getId() + " => " + document.getData());
+                                Film film = document.toObject(Film.class);
+                                film.setId(document.getId());
+                                films.add(film);
+                            }
+
+                            // Set to view
+                            FilmRecyclerViewAdapter adapter = new FilmRecyclerViewAdapter(getActivity(), films);
+                            adapter.setOnDeleteClickListener(i -> {
+                                Toast.makeText(getActivity(), "Deleted item at " + i, Toast.LENGTH_SHORT).show();
+                            });
+                            adapter.setOnEditClickListener(i -> {
+                                Toast.makeText(getActivity(), "Edit item at " + i, Toast.LENGTH_SHORT).show();
+                            });
+                            adapter.setOnClickListener(i -> {
+                                Bundle bundle = new Bundle();
+                                bundle.putString("filmId", films.get(i).getId());
+                                Navigation.findNavController(view).navigate(R.id.action_filmScreenFragment_to_filmDetailScreenFragment, bundle);
+                            });
+                            filmRecyclerView.setAdapter(adapter);
+                            filmRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+                        } else {
+                            Log.d("GET_FILM", "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
+
+
+
 
         btnAddFilm.setOnClickListener(v -> {
             Navigation.findNavController(view).navigate(R.id.action_filmScreenFragment_to_addFilmScreenFragment);
         });
-    }
-
-    private void initFilms() {
-        films.add(new Film("Midnight Whispers", "https://images.unsplash.com/photo-1590179068383-b9c69aacebd3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8ZmlsbSUyMHBvc3RlcnxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60"));
-        films.add(new Film("Shattered Dreams of Yesterday", "https://images.unsplash.com/photo-1578655858279-e17d055eafd0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fGZpbG0lMjBwaG90b2dyYXBoeXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60"));
-        films.add(new Film("Echoes of Forgotten Memories - I don't want to code in java!", "https://images.unsplash.com/photo-1543487945-139a97f387d5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8cG9zdGVyfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60"));
-        films.add(new Film("The Enigma's Hidden Legacy", "https://images.unsplash.com/photo-1583407723467-9b2d22504831?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fHBvc3RlcnxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60"));
-        films.add(new Film("Serendipity's Dance of Fate", "https://plus.unsplash.com/premium_photo-1668051042204-038187cac123?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8YW5pbWV8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60"));
     }
 }
