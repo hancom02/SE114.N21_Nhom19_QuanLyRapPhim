@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -88,12 +89,23 @@ public class FilmDetailScreenFragment extends Fragment {
                         tvReleaseDate.setText(dateFormat.format(film.getReleaseDate()));
                         Picasso.get().load(film.getImage()).into(imvImage);
 
+
                     } else {
                         Log.d("FILM_DETAIL", "No such document");
                     }
                 } else {
                     Log.d("FILM_DETAIL", "get failed with ", task.getException());
                 }
+            }
+        });
+
+
+        // Set btn action
+        btnEdit.setOnClickListener(v -> {
+            if (argFilmId != null) {
+                Bundle bundle = new Bundle();
+                bundle.putString("filmId", argFilmId);
+                Navigation.findNavController(view).navigate(R.id.editFilmScreenFragment, bundle);
             }
         });
     }
