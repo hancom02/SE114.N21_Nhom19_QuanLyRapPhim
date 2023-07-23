@@ -12,6 +12,7 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,28 +20,37 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.example.quanlyrapphim.models.Film;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 
 public class EditFilmScreenFragment extends Fragment {
 
     // ARG
     private String argFilmId;
-    
+
     // VIEW
     private TextInputEditText inputName;
     private TextInputEditText inputType;
@@ -53,7 +63,7 @@ public class EditFilmScreenFragment extends Fragment {
     private MaterialButton btnUpdate;
     private MaterialDatePicker datePicker = MaterialDatePicker.Builder.datePicker().setTitleText("Ngày công chiếu").build();
     private LinearLayout loading;
-    
+
     // OTHER
     ActivityResultLauncher<Intent> chooseImageActivityResultLauncher;
 
@@ -63,8 +73,6 @@ public class EditFilmScreenFragment extends Fragment {
     private boolean isImageModified;
     private Date pickedReleaseDate; // store date from picker
 
-    private Film film;
-    
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -96,7 +104,7 @@ public class EditFilmScreenFragment extends Fragment {
                         }
                     }
                 });
-        
+
     }
 
     @Override
@@ -154,14 +162,17 @@ public class EditFilmScreenFragment extends Fragment {
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
                         Log.d("FILM_DETAIL", "DocumentSnapshot data: " + document.getData());
-                        film = document.toObject(Film.class);
+                        Film film = document.toObject(Film.class);
                         inputName.setText(film.getName());
                         inputCast.setText(film.getCast());
                         inputContent.setText(film.getContent());
                         inputCountry.setText(film.getCountry());
                         inputType.setText(film.getType());
+
                         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
                         inputDateRelease.setText(dateFormat.format(film.getReleaseDate()));
+                        pickedReleaseDate = film.getReleaseDate();
+
                         Picasso.get().load(film.getImage()).into(imvImage);
                         btnRemoveImage.setVisibility(View.VISIBLE);
 
@@ -176,9 +187,115 @@ public class EditFilmScreenFragment extends Fragment {
         });
 
 
+        // handle update film
+        btnUpdate.setOnClickListener(v -> {
 
-        
-        
+            if (
+                    inputName.getText().toString() == "" ||
+                    inputType.getText().toString() == "" ||
+                    inputCountry.getText().toString() == "" ||
+                    inputCast.getText().toString() == "" ||
+                    inputContent.getText().toString() == "" ||
+                    pickedReleaseDate == null
+            ) {
+                Toast.makeText(getActivity(), "Vui lòng nhập đầy đủ thông tin!", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            Map<String,Object> updateMap = new HashMap<>();
+            updateMap.put("name", inputName.getText().toString());
+            updateMap.put("type", inputType.getText().toString());
+            updateMap.put("country", inputCountry.getText().toString());
+            updateMap.put("cast", inputCast.getText().toString());
+            updateMap.put("content", inputContent.getText().toString());
+            updateMap.put("releaseDate", pickedReleaseDate);
+            Film updateFilm = new Film();
+
+            // NOT MODIFIED IMAGE
+            if (!isImageModified) {
+                // UPDATE FILM IN FIRESTORE
+                db.collection("films").document(argFilmId)
+                        .update(updateMap)
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                Toast.makeText(getActivity(), "Cập nhật phim thành công!", Toast.LENGTH_SHORT).show();
+                                Navigation.findNavController(view).navigate(R.id.filmScreenFragment);
+                                loading.setVisibility(View.GONE);
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(getActivity(), "Có lỗi xảy ra!", Toast.LENGTH_SHORT).show();
+                                loading.setVisibility(View.GONE);
+                            }
+                        });
+                return;
+            }
+
+
+            // UPLOAD IMAGE AND CREATE FILM
+            loading.setVisibility(View.VISIBLE);
+
+            // Defining the child of storageReference
+            StorageReference ref = storage.getReference().child("films/" + UUID.randomUUID().toString());
+
+            // UPLOAD IMAGE
+            ref.putFile(filePath)
+                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            // Image uploaded successfully
+
+                            // GET URL
+                            taskSnapshot.getMetadata().getReference().getDownloadUrl()
+                                    .addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                        @Override
+                                        public void onSuccess(Uri uri) {
+                                            String imageUrl = uri.toString();
+                                            updateFilm.setImage(imageUrl);
+
+                                            // CREATE FILM IN FIRESTORE
+                                            db.collection("films")
+                                                    .add(updateFilm)
+                                                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                                        @Override
+                                                        public void onSuccess(DocumentReference documentReference) {
+                                                            Toast.makeText(getActivity(), "Thêm phim thành công!", Toast.LENGTH_SHORT).show();
+                                                            Navigation.findNavController(view).navigate(R.id.filmScreenFragment);
+                                                            loading.setVisibility(View.GONE);
+                                                        }
+                                                    })
+                                                    .addOnFailureListener(new OnFailureListener() {
+                                                        @Override
+                                                        public void onFailure(@NonNull Exception e) {
+                                                            Toast.makeText(getActivity(), "Có lỗi xảy ra!", Toast.LENGTH_SHORT).show();
+                                                            loading.setVisibility(View.GONE);
+                                                        }
+                                                    });
+                                        }
+                                    }).addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Toast.makeText(getActivity(), "Có lỗi xảy ra!", Toast.LENGTH_SHORT).show();
+                                            loading.setVisibility(View.GONE);
+                                        }
+                                    });
+
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            // Error, Image not uploaded
+                            Toast.makeText(getActivity(), "Có lỗi xảy ra!", Toast.LENGTH_SHORT).show();
+                            loading.setVisibility(View.GONE);
+                        }
+                    });
+        });
+
+
     }
 
     void chooseImage() {

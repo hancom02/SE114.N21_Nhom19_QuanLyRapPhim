@@ -126,7 +126,6 @@ public class AddFilmScreenFragment extends Fragment {
     private Date pickedReleaseDate; // store date from picker
 
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -205,11 +204,11 @@ public class AddFilmScreenFragment extends Fragment {
 
             if (
                     inputName.getText().toString() == "" ||
-                    inputType.getText().toString() == "" ||
-                    inputCountry.getText().toString() == "" ||
-                    inputCast.getText().toString() == "" ||
-                    inputContent.getText().toString() == "" ||
-                    pickedReleaseDate == null || filePath == null
+                            inputType.getText().toString() == "" ||
+                            inputCountry.getText().toString() == "" ||
+                            inputCast.getText().toString() == "" ||
+                            inputContent.getText().toString() == "" ||
+                            pickedReleaseDate == null || filePath == null
             ) {
                 Toast.makeText(getActivity(), "Vui lòng nhập đầy đủ thông tin!", Toast.LENGTH_SHORT).show();
                 return;
@@ -228,50 +227,47 @@ public class AddFilmScreenFragment extends Fragment {
 
 
             // UPLOAD IMAGE AND CREATE FILM
+            loading.setVisibility(View.VISIBLE);
 
-            if (filePath != null) {
+            // Defining the child of storageReference
+            StorageReference ref = storage.getReference().child("films/" + UUID.randomUUID().toString());
 
-                //Toast.makeText(getActivity(), "Image Uploading!!", Toast.LENGTH_SHORT).show();
-                // Defining the child of storageReference
-                StorageReference ref = storage.getReference().child("films/" + UUID.randomUUID().toString());
-
-                loading.setVisibility(View.VISIBLE);
-                // adding listeners on upload
-                // or failure of image
-                ref.putFile(filePath)
-                    .addOnSuccessListener( new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            // adding listeners on upload
+            // or failure of image
+            ref.putFile(filePath)
+                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                             // Image uploaded successfully
 
                             // GET URL
                             taskSnapshot.getMetadata().getReference().getDownloadUrl()
-                                .addOnSuccessListener(new OnSuccessListener<Uri>() {
-                                    @Override
-                                    public void onSuccess(Uri uri) {
-                                        String imageUrl = uri.toString();
-                                        createFilm.setImage(imageUrl);
+                                    .addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                        @Override
+                                        public void onSuccess(Uri uri) {
+                                            String imageUrl = uri.toString();
+                                            createFilm.setImage(imageUrl);
 
-                                        // CREATE FILM IN FIRESTORE
-                                        db.collection("films")
-                                            .add(createFilm)
-                                            .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                                                @Override
-                                                public void onSuccess(DocumentReference documentReference) {
-                                                    Toast.makeText(getActivity(), "Thêm phim thành công!", Toast.LENGTH_SHORT).show();
-                                                    Navigation.findNavController(view).navigate(R.id.filmScreenFragment);
-                                                    loading.setVisibility(View.GONE);
-                                                }
-                                            })
-                                            .addOnFailureListener(new OnFailureListener() {
-                                                @Override
-                                                public void onFailure(@NonNull Exception e) {
-                                                    Toast.makeText(getActivity(), "Có lỗi xảy ra!", Toast.LENGTH_SHORT).show();
-                                                    loading.setVisibility(View.GONE);
-                                                }
-                                            });
-                                    }
-                                }).addOnFailureListener(new OnFailureListener() {
+                                            // CREATE FILM IN FIRESTORE
+                                            db.collection("films")
+                                                    .add(createFilm)
+                                                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                                        @Override
+                                                        public void onSuccess(DocumentReference documentReference) {
+                                                            Toast.makeText(getActivity(), "Thêm phim thành công!", Toast.LENGTH_SHORT).show();
+                                                            Navigation.findNavController(view).navigate(R.id.filmScreenFragment);
+                                                            loading.setVisibility(View.GONE);
+                                                        }
+                                                    })
+                                                    .addOnFailureListener(new OnFailureListener() {
+                                                        @Override
+                                                        public void onFailure(@NonNull Exception e) {
+                                                            Toast.makeText(getActivity(), "Có lỗi xảy ra!", Toast.LENGTH_SHORT).show();
+                                                            loading.setVisibility(View.GONE);
+                                                        }
+                                                    });
+                                        }
+                                    }).addOnFailureListener(new OnFailureListener() {
                                         @Override
                                         public void onFailure(@NonNull Exception e) {
                                             Toast.makeText(getActivity(), "Có lỗi xảy ra!", Toast.LENGTH_SHORT).show();
@@ -289,11 +285,6 @@ public class AddFilmScreenFragment extends Fragment {
                             loading.setVisibility(View.GONE);
                         }
                     });
-            } else {
-                Toast.makeText(getActivity(), "Có lỗi xảy ra!", Toast.LENGTH_SHORT).show();
-            }
-
-
         });
     }
 
