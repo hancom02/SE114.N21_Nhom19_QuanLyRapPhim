@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:padding="24dp"
+    tools:context=".fragments.ProfileFragment">
+
+    <TextView
+        android:id="@+id/fieldNameText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.3"
+        android:background="@drawable/text_border"
+        android:padding="10dp"
+        android:text="Tong rap"
+        android:textAlignment="center"></TextView>
+
+    <Spinner
+        android:id="@+id/fieldContentDropdown"
+        android:layout_width="0dp"
+        android:shadowRadius="30"
+        android:prompt="@string/second_fragment_label"
+        android:layout_height="38dp"
+        android:layout_marginLeft="20dp"
+        android:background="@drawable/text_border"
+        android:layout_weight="0.65"
+        android:textAlignment="center"
+        android:padding="10dp"
+        android:spinnerMode="dropdown"
+        ></Spinner>
+
+
+</LinearLayout>

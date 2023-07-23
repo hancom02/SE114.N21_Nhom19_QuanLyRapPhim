@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:padding="24dp"
+    tools:context=".fragments.ProfileFragment">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ho Ten"
+        android:textColor="@color/black"
+        android:layout_marginBottom="10dp"
+        android:id="@+id/fieldName"
+        android:textStyle="bold"
+        ></TextView>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Hoang Giang"
+        android:background="@drawable/text_border"
+        android:id="@+id/fieldContent"
+        android:textColor="#3c3f41"
+        android:padding="10dp"
+        ></TextView>
+<!--    <com.google.android.material.textfield.TextInputLayout-->
+<!--        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:hint="Hoang Giang"-->
+<!--        android:layout_marginBottom="12dp"-->
+<!--        >-->
+
+<!--        <com.google.android.material.textfield.TextInputEditText-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            ></com.google.android.material.textfield.TextInputEditText>-->
+
+<!--    </com.google.android.material.textfield.TextInputLayout>-->
+
+
+
+</LinearLayout>
