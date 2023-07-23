@@ -70,7 +70,7 @@ public class EditFilmScreenFragment extends Fragment {
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private FirebaseStorage storage = FirebaseStorage.getInstance();
     private Uri filePath = null;
-    private boolean isImageModified;
+    private boolean isImageModified = false;
     private Date pickedReleaseDate; // store date from picker
 
 
@@ -174,7 +174,6 @@ public class EditFilmScreenFragment extends Fragment {
                         pickedReleaseDate = film.getReleaseDate();
 
                         Picasso.get().load(film.getImage()).into(imvImage);
-                        btnRemoveImage.setVisibility(View.VISIBLE);
 
 
                     } else {
@@ -196,7 +195,9 @@ public class EditFilmScreenFragment extends Fragment {
                     inputCountry.getText().toString() == "" ||
                     inputCast.getText().toString() == "" ||
                     inputContent.getText().toString() == "" ||
-                    pickedReleaseDate == null
+                    pickedReleaseDate == null ||
+                    (isImageModified && filePath == null)
+
             ) {
                 Toast.makeText(getActivity(), "Vui lòng nhập đầy đủ thông tin!", Toast.LENGTH_SHORT).show();
                 return;
@@ -209,7 +210,6 @@ public class EditFilmScreenFragment extends Fragment {
             updateMap.put("cast", inputCast.getText().toString());
             updateMap.put("content", inputContent.getText().toString());
             updateMap.put("releaseDate", pickedReleaseDate);
-            Film updateFilm = new Film();
 
             // NOT MODIFIED IMAGE
             if (!isImageModified) {
@@ -235,7 +235,8 @@ public class EditFilmScreenFragment extends Fragment {
             }
 
 
-            // UPLOAD IMAGE AND CREATE FILM
+
+            // WHEN MODIFIED IMAGE
             loading.setVisibility(View.VISIBLE);
 
             // Defining the child of storageReference
@@ -254,15 +255,15 @@ public class EditFilmScreenFragment extends Fragment {
                                         @Override
                                         public void onSuccess(Uri uri) {
                                             String imageUrl = uri.toString();
-                                            updateFilm.setImage(imageUrl);
+                                            updateMap.put("image", imageUrl);
 
-                                            // CREATE FILM IN FIRESTORE
-                                            db.collection("films")
-                                                    .add(updateFilm)
-                                                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                            // UPDATE FILM IN FIRESTORE
+                                            db.collection("films").document(argFilmId)
+                                                    .update(updateMap)
+                                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
                                                         @Override
-                                                        public void onSuccess(DocumentReference documentReference) {
-                                                            Toast.makeText(getActivity(), "Thêm phim thành công!", Toast.LENGTH_SHORT).show();
+                                                        public void onSuccess(Void aVoid) {
+                                                            Toast.makeText(getActivity(), "Cập nhật phim thành công!", Toast.LENGTH_SHORT).show();
                                                             Navigation.findNavController(view).navigate(R.id.filmScreenFragment);
                                                             loading.setVisibility(View.GONE);
                                                         }
