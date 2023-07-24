@@ -48,9 +48,9 @@
         app:startDestination="@id/employeeScreenFragment">
         <fragment
             android:id="@+id/employeeScreenFragment"
-            android:name="com.example.quanlyrapphim.fragments.EmployeeScreenFragment"
+            android:name="com.example.quanlyrapphim.fragments.StaffScreenFragment"
             android:label="Nhân viên"
-            tools:layout="@layout/fragment_employee_screen" />
+            tools:layout="@layout/fragment_staff_screen" />
     </navigation>
     <navigation
         android:id="@+id/cinemaRoomScreenGroup"

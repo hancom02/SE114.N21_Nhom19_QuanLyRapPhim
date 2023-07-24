@@ -5,7 +5,6 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -15,15 +14,13 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.quanlyrapphim.R;
-import com.example.quanlyrapphim.adapters.EmployeeRecyclerViewAdapter;
-import com.example.quanlyrapphim.adapters.FilmRecyclerViewAdapter;
+import com.example.quanlyrapphim.adapters.StaffRecyclerViewAdapter;
 import com.example.quanlyrapphim.models.Employee;
-import com.example.quanlyrapphim.models.Film;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 
-public class EmployeeScreenFragment extends Fragment {
+public class StaffScreenFragment extends Fragment {
 
     private ArrayList<Employee> employees = new ArrayList<>();
     private RecyclerView employeeRecyclerView;
@@ -38,7 +35,7 @@ public class EmployeeScreenFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_employee_screen, container, false);
+        return inflater.inflate(R.layout.fragment_staff_screen, container, false);
     }
 
     @Override
@@ -47,7 +44,7 @@ public class EmployeeScreenFragment extends Fragment {
         employeeRecyclerView = view.findViewById(R.id.employee_recycle_view);
         btnAddEmployee = view.findViewById(R.id.employee_screen_btn_add_employee);
 
-        EmployeeRecyclerViewAdapter adapter = new EmployeeRecyclerViewAdapter(getActivity(), employees);
+        StaffRecyclerViewAdapter adapter = new StaffRecyclerViewAdapter(getActivity(), employees);
         adapter.setOnDeleteClickListener(i -> {
             Toast.makeText(getActivity(), "Deleted item at " + i, Toast.LENGTH_SHORT).show();
         });

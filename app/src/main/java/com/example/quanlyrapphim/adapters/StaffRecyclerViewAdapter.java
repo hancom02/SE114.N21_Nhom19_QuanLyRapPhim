@@ -13,32 +13,31 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.quanlyrapphim.R;
 import com.example.quanlyrapphim.models.Employee;
-import com.example.quanlyrapphim.models.Film;
 import com.example.quanlyrapphim.utils.RecyclerViewItemEventListener;
 import com.google.android.material.button.MaterialButton;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-public class EmployeeRecyclerViewAdapter extends RecyclerView.Adapter<EmployeeRecyclerViewAdapter.MyViewHolder> {
+public class StaffRecyclerViewAdapter extends RecyclerView.Adapter<StaffRecyclerViewAdapter.MyViewHolder> {
 
     private Context context;
     private ArrayList<Employee> employees;
     private RecyclerViewItemEventListener deleteClickListener;
     private RecyclerViewItemEventListener editClickListener;
 
-    public EmployeeRecyclerViewAdapter(Context context, ArrayList<Employee> employees) {
+    public StaffRecyclerViewAdapter(Context context, ArrayList<Employee> employees) {
         this.context = context;
         this.employees = employees;
     }
 
     @NonNull
     @Override
-    public EmployeeRecyclerViewAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public StaffRecyclerViewAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.employee_card, viewGroup, false);
+        View view = inflater.inflate(R.layout.staff_card, viewGroup, false);
 
-        return new EmployeeRecyclerViewAdapter.MyViewHolder(view);
+        return new StaffRecyclerViewAdapter.MyViewHolder(view);
     }
 
     @Override
