@@ -7,13 +7,11 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.GridView;
 import android.widget.Toast;
 
 import com.example.quanlyrapphim.adapters.RefreshmentsRecyclerViewAdapter;
@@ -22,15 +20,15 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 
-public class RefreshmentFragment extends Fragment {
+public class RefreshmentScreenFragment extends Fragment {
 
     private ArrayList<Refreshment> refreshmentArrayList = new ArrayList<>();
     private RecyclerView refreshmentRecyclerView;
     private FloatingActionButton addRefreshmentBtn;
 
-    public RefreshmentFragment() {
-        // Required empty public constructor
-    }
+//    public RefreshmentScreenFragment() {
+//        // Required empty public constructor
+//    }
 
 
     @Override
@@ -59,14 +57,15 @@ public class RefreshmentFragment extends Fragment {
             Toast.makeText(getActivity(), "Deleted item at " + i, Toast.LENGTH_SHORT).show();
         });
         adapter.setOnEditClickListener(i -> {
-            Toast.makeText(getActivity(), "Edit item at " + i, Toast.LENGTH_SHORT).show();
+//            Toast.makeText(getActivity(), "Edit item at " + i, Toast.LENGTH_SHORT).show();
+            Navigation.findNavController(view).navigate(R.id.action_refreshmentScreenFragment_to_editRefreshmentScreenFragment);
         });
         refreshmentRecyclerView.setAdapter(adapter);
         refreshmentRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
 
         addRefreshmentBtn.setOnClickListener(v -> {
-            Toast.makeText(getActivity(), "Nav to add refreshment screen", Toast.LENGTH_SHORT).show();
-//            Navigation.findNavController(view).navigate(R.id.action_filmScreenFragment_to_addFilmScreenFragment);
+//            Toast.makeText(getActivity(), "Nav to add refreshment screen", Toast.LENGTH_SHORT).show();
+            Navigation.findNavController(view).navigate(R.id.action_refreshmentScreenFragment_to_addRefreshmentScreenFragment);
         });
     }
 
@@ -77,5 +76,11 @@ public class RefreshmentFragment extends Fragment {
         refreshmentArrayList.add(new Refreshment("small_popcorn4", "Bắp nhỏ", 35000));
         refreshmentArrayList.add(new Refreshment("small_popcorn5", "Bắp nhỏ", 35000));
         refreshmentArrayList.add(new Refreshment("small_popcorn6", "Bắp nhỏ", 35000));
+        refreshmentArrayList.add(new Refreshment("small_popcorn6", "Bắp nhỏ", 35000));
+        refreshmentArrayList.add(new Refreshment("small_popcorn6", "Bắp nhỏ", 35000));
+        refreshmentArrayList.add(new Refreshment("small_popcorn6", "Bắp nhỏ", 35000));
+        refreshmentArrayList.add(new Refreshment("small_popcorn6", "Bắp nhỏ", 35000));
+        refreshmentArrayList.add(new Refreshment("small_popcorn6", "Bắp nhỏ", 35000));
+
     }
 }
