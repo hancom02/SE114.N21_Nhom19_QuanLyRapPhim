@@ -1,6 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="0dp"
+        android:paddingHorizontal="20dp"
+        >
+        <TextView
+            android:id="@+id/time_slot_card_tv_start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="9:00"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:textSize="14sp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+             />
+        <TextView
+            android:id="@+id/time_slot_card_tv_space"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" - "
+            app:layout_constraintStart_toEndOf="@id/time_slot_card_tv_start"
+            app:layout_constraintTop_toTopOf="@id/time_slot_card_tv_start" />
+
+        <TextView
+            android:id="@+id/time_slot_card_tv_end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="11:30"
+            android:textSize="14dp"
+            app:layout_constraintStart_toEndOf="@id/time_slot_card_tv_space"
+            app:layout_constraintTop_toTopOf="@id/time_slot_card_tv_space" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/timeslot_card_btn_edit"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="22dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toStartOf="@id/time_slot_card_btn_delete"
+            app:layout_constraintTop_toTopOf="@id/time_slot_card_tv_start"
+            app:layout_constraintBottom_toBottomOf="@id/time_slot_card_tv_start"
+            android:layout_marginLeft="10dp"
+            app:icon="@drawable/edit_primary_24"
+            android:minWidth="0dp"
+            app:iconSize="18dp"
+            android:background="@android:color/transparent"
+            app:iconTint="@color/primary"
+            app:iconPadding="0dp"
+            app:iconGravity="textEnd"
+            />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/time_slot_card_btn_delete"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="22dp"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:minWidth="0dp"
+            app:icon="@drawable/delete_primary_24"
+            app:iconPadding="0dp"
+            app:iconGravity="textEnd"
+            app:iconSize="18dp"
+            app:iconTint="@color/primary"
+            app:layout_constraintTop_toTopOf="@id/time_slot_card_tv_start"
+            app:layout_constraintBottom_toBottomOf="@id/time_slot_card_tv_start"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </com.google.android.material.card.MaterialCardView>
