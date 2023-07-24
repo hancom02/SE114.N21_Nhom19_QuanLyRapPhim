@@ -1,4 +1,4 @@
-package com.example.quanlyrapphim;
+package com.example.quanlyrapphim.fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,6 +13,7 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.quanlyrapphim.R;
 import com.example.quanlyrapphim.adapters.CinemaRoomRecyclerViewAdapter;
 import com.example.quanlyrapphim.models.CinemaRoom;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;

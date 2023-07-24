@@ -1,4 +1,4 @@
-package com.example.quanlyrapphim;
+package com.example.quanlyrapphim.fragments;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -22,6 +22,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.example.quanlyrapphim.R;
 import com.example.quanlyrapphim.models.Film;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;

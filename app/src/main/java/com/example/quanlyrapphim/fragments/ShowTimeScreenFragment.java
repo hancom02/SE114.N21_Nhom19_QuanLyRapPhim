@@ -1,4 +1,4 @@
-package com.example.quanlyrapphim;
+package com.example.quanlyrapphim.fragments;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.quanlyrapphim.R;
 import com.example.quanlyrapphim.adapters.ShowTimeRecyclerViewAdapter;
 import com.example.quanlyrapphim.adapters.TimeSlotRecyclerViewAdapter;
 import com.example.quanlyrapphim.models.CinemaRoom;
@@ -40,7 +41,7 @@ public class ShowTimeScreenFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        initShowTime();
+//        initShowTime();
     }
 
     @Override
@@ -74,13 +75,13 @@ public class ShowTimeScreenFragment extends Fragment {
         });
     }
 
-    private void initShowTime() {
-        showTimeArrayList.add(new ShowTime(new Film("Như Ý Truyện", "https://images.unsplash.com/photo-1590179068383-b9c69aacebd3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8ZmlsbSUyMHBvc3RlcnxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60"), new CinemaRoom("Rạp 5", "Normal", 10, 12), new TimeSlot("15:30", "18:00")));
-        showTimeArrayList.add(new ShowTime(new Film("Qủy quyệt", "https://images.unsplash.com/photo-1590179068383-b9c69aacebd3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8ZmlsbSUyMHBvc3RlcnxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60"), new CinemaRoom("Rạp 5", "Normal", 10, 12), new TimeSlot("15:30", "18:00")));
-        showTimeArrayList.add(new ShowTime(new Film("Cung Tỏa Trầm Hương", "https://images.unsplash.com/photo-1590179068383-b9c69aacebd3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8ZmlsbSUyMHBvc3RlcnxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60"), new CinemaRoom("Rạp 5", "Normal", 10, 12), new TimeSlot("15:30", "18:00")));
-        showTimeArrayList.add(new ShowTime(new Film("Conan 6", "https://images.unsplash.com/photo-1590179068383-b9c69aacebd3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8ZmlsbSUyMHBvc3RlcnxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60"), new CinemaRoom("Rạp 5", "Normal", 10, 12), new TimeSlot("15:30", "18:00")));
-        showTimeArrayList.add(new ShowTime(new Film("Thanh gươm diệt quỷ", "https://images.unsplash.com/photo-1590179068383-b9c69aacebd3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8ZmlsbSUyMHBvc3RlcnxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60"), new CinemaRoom("Rạp 5", "Normal", 10, 12), new TimeSlot("15:30", "18:00")));
-
-    }
+//    private void initShowTime() {
+//        showTimeArrayList.add(new ShowTime(new Film("Như Ý Truyện", "https://images.unsplash.com/photo-1590179068383-b9c69aacebd3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8ZmlsbSUyMHBvc3RlcnxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60"), new CinemaRoom("Rạp 5", "Normal", 10, 12), new TimeSlot("15:30", "18:00")));
+//        showTimeArrayList.add(new ShowTime(new Film("Qủy quyệt", "https://images.unsplash.com/photo-1590179068383-b9c69aacebd3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8ZmlsbSUyMHBvc3RlcnxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60"), new CinemaRoom("Rạp 5", "Normal", 10, 12), new TimeSlot("15:30", "18:00")));
+//        showTimeArrayList.add(new ShowTime(new Film("Cung Tỏa Trầm Hương", "https://images.unsplash.com/photo-1590179068383-b9c69aacebd3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8ZmlsbSUyMHBvc3RlcnxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60"), new CinemaRoom("Rạp 5", "Normal", 10, 12), new TimeSlot("15:30", "18:00")));
+//        showTimeArrayList.add(new ShowTime(new Film("Conan 6", "https://images.unsplash.com/photo-1590179068383-b9c69aacebd3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8ZmlsbSUyMHBvc3RlcnxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60"), new CinemaRoom("Rạp 5", "Normal", 10, 12), new TimeSlot("15:30", "18:00")));
+//        showTimeArrayList.add(new ShowTime(new Film("Thanh gươm diệt quỷ", "https://images.unsplash.com/photo-1590179068383-b9c69aacebd3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8ZmlsbSUyMHBvc3RlcnxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60"), new CinemaRoom("Rạp 5", "Normal", 10, 12), new TimeSlot("15:30", "18:00")));
+//
+//    }
 
 }

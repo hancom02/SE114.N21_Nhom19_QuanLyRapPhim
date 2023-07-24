@@ -1,4 +1,4 @@
-package com.example.quanlyrapphim;
+package com.example.quanlyrapphim.fragments;
 
 import android.os.Bundle;
 
@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.quanlyrapphim.R;
 import com.example.quanlyrapphim.models.Film;
 import com.example.quanlyrapphim.utils.ConfirmDeleteDialog;
 import com.google.android.gms.tasks.OnCompleteListener;

@@ -1,4 +1,4 @@
-package com.example.quanlyrapphim;
+package com.example.quanlyrapphim.fragments;
 
 import android.os.Bundle;
 
@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.quanlyrapphim.R;
 import com.example.quanlyrapphim.adapters.RefreshmentsRecyclerViewAdapter;
 import com.example.quanlyrapphim.adapters.TimeSlotRecyclerViewAdapter;
 import com.example.quanlyrapphim.models.Refreshment;

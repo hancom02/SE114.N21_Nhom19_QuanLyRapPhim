@@ -35,12 +35,12 @@
             tools:layout="@layout/fragment_add_film_screen" />
         <fragment
             android:id="@+id/filmDetailScreenFragment"
-            android:name="com.example.quanlyrapphim.FilmDetailScreenFragment"
+            android:name="com.example.quanlyrapphim.fragments.FilmDetailScreenFragment"
             android:label="Chi tiết phim"
             tools:layout="@layout/fragment_film_detail_screen" />
         <fragment
             android:id="@+id/editFilmScreenFragment"
-            android:name="com.example.quanlyrapphim.EditFilmScreenFragment"
+            android:name="com.example.quanlyrapphim.fragments.EditFilmScreenFragment"
             android:label="Chỉnh sửa phim"
             tools:layout="@layout/fragment_edit_film_screen" />
     </navigation>
@@ -57,7 +57,7 @@
         app:startDestination="@id/cinemaRoomScreenFragment">
         <fragment
             android:id="@+id/cinemaRoomScreenFragment"
-            android:name="com.example.quanlyrapphim.CinemaRoomScreenFragment"
+            android:name="com.example.quanlyrapphim.fragments.CinemaRoomScreenFragment"
             android:label="Phòng Chiếu"
             tools:layout="@layout/fragment_cinemaroom_screen" >
             <action
@@ -69,11 +69,11 @@
         </fragment>
         <fragment
             android:id="@+id/addCinemaRoomScreenFragment"
-            android:name="com.example.quanlyrapphim.AddCinemaRoomScreenFragment"
+            android:name="com.example.quanlyrapphim.fragments.AddCinemaRoomScreenFragment"
             android:label="AddCinemaRoomScreenFragment" />
         <fragment
             android:id="@+id/detailCinemaRoomScreenFragment"
-            android:name="com.example.quanlyrapphim.AddCinemaRoomScreenFragment"
+            android:name="com.example.quanlyrapphim.fragments.AddCinemaRoomScreenFragment"
             android:label="DetailCinemaRoomScreenFragment" />
 
     </navigation>
@@ -82,7 +82,7 @@
         app:startDestination="@id/refreshmentScreenFragment">
         <fragment
             android:id="@+id/refreshmentScreenFragment"
-            android:name="com.example.quanlyrapphim.RefreshmentScreenFragment"
+            android:name="com.example.quanlyrapphim.fragments.RefreshmentScreenFragment"
             android:label="RefreshmentFragment" >
             <action
                 android:id="@+id/action_refreshmentScreenFragment_to_addRefreshmentScreenFragment"
@@ -93,11 +93,11 @@
         </fragment>
         <fragment
             android:id="@+id/addRefreshmentScreenFragment"
-            android:name="com.example.quanlyrapphim.AddRefreshmentScreenFragment"
+            android:name="com.example.quanlyrapphim.fragments.AddRefreshmentScreenFragment"
             android:label="AddRefreshmentFragment" />
         <fragment
             android:id="@+id/editRefreshmentScreenFragment"
-            android:name="com.example.quanlyrapphim.EditFreshmentScreenFragment"
+            android:name="com.example.quanlyrapphim.fragments.EditFreshmentScreenFragment"
             android:label="EditRefreshmentFragment" />
 
     </navigation>
@@ -105,7 +105,7 @@
         app:startDestination="@id/timeSlotScreenFragment">
         <fragment
             android:id="@+id/timeSlotScreenFragment"
-            android:name="com.example.quanlyrapphim.TimeSlotScreenFragment"
+            android:name="com.example.quanlyrapphim.fragments.TimeSlotScreenFragment"
             android:label="TimeSlotScreenFragment" >
 
             <action
@@ -114,7 +114,7 @@
         </fragment>
         <fragment
             android:id="@+id/addTimeSlotScreenFragment"
-            android:name="com.example.quanlyrapphim.AddTimeSlotScreenFragment"
+            android:name="com.example.quanlyrapphim.fragments.AddTimeSlotScreenFragment"
             android:label="AddTimeSlotScreenFragment" />
     </navigation>
     <navigation
@@ -122,7 +122,7 @@
         app:startDestination="@id/showTimeScreenFragment">
         <fragment
             android:id="@+id/showTimeScreenFragment"
-            android:name="com.example.quanlyrapphim.ShowTimeScreenFragment"
+            android:name="com.example.quanlyrapphim.fragments.ShowTimeScreenFragment"
             android:label="ShowTimeScreenFragment" >
             <action
                 android:id="@+id/action_showTimeScreenFragment_to_addShowTimeFragmentScreen"
@@ -130,7 +130,7 @@
         </fragment>
         <fragment
             android:id="@+id/addShowTimeFragmentScreen"
-            android:name="com.example.quanlyrapphim.AddShowTimeFragmentScreen"
+            android:name="com.example.quanlyrapphim.fragments.AddShowTimeFragmentScreen"
             android:label="fragment_add_show_time_screen"
 
             />

@@ -10,9 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.quanlyrapphim.R;
-import com.example.quanlyrapphim.ShowTimeScreenFragment;
 import com.example.quanlyrapphim.models.ShowTime;
-import com.example.quanlyrapphim.models.TimeSlot;
 import com.example.quanlyrapphim.utils.RecyclerViewItemEventListener;
 import com.google.android.material.button.MaterialButton;
 
