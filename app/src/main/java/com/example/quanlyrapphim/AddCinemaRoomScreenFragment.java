@@ -9,20 +9,18 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.quanlyrapphim.R;
 import com.google.android.material.button.MaterialButton;
 
-public class DetailCinemaRoomScreenFragment extends Fragment {
-    private MaterialButton editCinemaRoomBtn;
+public class AddCinemaRoomScreenFragment extends Fragment {
     private MaterialButton addCinemaRoomBtn;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-//        editCinemaRoomBtn = editCinemaRoomBtn.findViewById(R.id.item_cinemaroom_spinner_bt_edit);
-//        editCinemaRoomBtn.setVisibility(View.GONE);
-//
 //        addCinemaRoomBtn = addCinemaRoomBtn.findViewById(R.id.item_cinemaroom_spinner_bt_add);
-//        addCinemaRoomBtn.setVisibility(View.GONE);
+//        addCinemaRoomBtn.setVisibility(View.VISIBLE);
     }
 
     @Nullable
@@ -30,11 +28,8 @@ public class DetailCinemaRoomScreenFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_detail_edit_add_cinemaroom_screen, container, false);
 
-        editCinemaRoomBtn = view.findViewById(R.id.item_cinemaroom_spinner_bt_edit);
-        editCinemaRoomBtn.setVisibility(View.GONE);
-
         addCinemaRoomBtn = view.findViewById(R.id.item_cinemaroom_spinner_bt_add);
-        addCinemaRoomBtn.setVisibility(View.GONE);
+        addCinemaRoomBtn.setVisibility(View.VISIBLE);
 
         return view;
     }
@@ -43,10 +38,7 @@ public class DetailCinemaRoomScreenFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-//        editCinemaRoomBtn = view.findViewById(R.id.item_cinemaroom_spinner_bt_edit);
-//        editCinemaRoomBtn.setVisibility(View.GONE);
-//
 //        addCinemaRoomBtn = view.findViewById(R.id.item_cinemaroom_spinner_bt_add);
-//        addCinemaRoomBtn.setVisibility(View.GONE);
+//        addCinemaRoomBtn.setVisibility(View.VISIBLE);
     }
 }
