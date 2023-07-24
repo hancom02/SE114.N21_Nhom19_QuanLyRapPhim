@@ -79,6 +79,8 @@
 
                 <com.google.android.material.button.MaterialButtonToggleGroup
                     android:id="@+id/add_staff_screen_input_gender"
+                    app:singleSelection="true"
+                    app:selectionRequired="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
                     <Button
