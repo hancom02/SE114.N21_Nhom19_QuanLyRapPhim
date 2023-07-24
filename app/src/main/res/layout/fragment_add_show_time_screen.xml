@@ -1,14 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".AddShowTimeFragmentScreen">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:id="@+id/add_show_time_tv_film"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:text="Phim"
+        android:textSize="16dp"
+        />
+    <androidx.appcompat.widget.AppCompatSpinner
+        android:id="@+id/add_show_time_spinner_film"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/add_show_time_tv_film"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginLeft="80dp"/>
+    <TextView
+        android:id="@+id/add_show_time_tv_time_slot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/add_show_time_tv_film"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="Khung giờ chiếu"
+        android:textSize="16dp"
+        android:layout_marginTop="20dp"/>
+    <androidx.appcompat.widget.AppCompatSpinner
+        android:id="@+id/add_show_time_spinner_time_slot"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        app:layout_constraintStart_toEndOf="@id/add_show_time_tv_time_slot"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/add_show_time_tv_time_slot"/>
+    <TextView
+        android:id="@+id/add_show_time_tv_cinema"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/add_show_time_tv_time_slot"
+        android:text="Rạp chiếu"
+        android:textSize="16dp"
+        android:layout_marginTop="20dp"/>
+    <androidx.appcompat.widget.AppCompatSpinner
+        android:id="@+id/add_show_time_spinner_cinema"
+        style="@style/Widget.AppCompat.DropDownItem.Spinner"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="55dp"
+        app:layout_constraintStart_toEndOf="@id/add_show_time_tv_cinema"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/add_show_time_tv_cinema"/>
 
-</FrameLayout>
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/add_show_time_btn_add"
+        android:text="Thêm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/add_show_time_spinner_cinema"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:visibility="visible"
+        android:layout_marginTop="10dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

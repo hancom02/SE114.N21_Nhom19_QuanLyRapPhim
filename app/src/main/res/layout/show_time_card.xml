@@ -1,6 +1,152 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="0dp"
+        android:paddingHorizontal="20dp"
+        >
+        <TextView
+            android:id="@+id/show_time_card_tv_film"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Như Ý Truyện"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:textSize="14sp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
+        <TextView
+            android:id="@+id/show_time_card_tv_time1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="9:00"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:textSize="14sp"
+            app:layout_constraintTop_toBottomOf="@id/show_time_card_tv_film"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
+        <TextView
+            android:id="@+id/show_time_card_tv_space1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" - "
+            app:layout_constraintStart_toEndOf="@id/show_time_card_tv_time1"
+            app:layout_constraintTop_toTopOf="@id/show_time_card_tv_time1" />
+
+        <TextView
+            android:id="@+id/show_time_card_tv_cinema1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Rạp 2"
+            android:textSize="14dp"
+            app:layout_constraintStart_toEndOf="@id/show_time_card_tv_space1"
+            app:layout_constraintTop_toTopOf="@id/show_time_card_tv_time1"
+           />
+        <TextView
+            android:id="@+id/show_time_card_tv_time2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="14:00"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:textSize="14sp"
+            app:layout_constraintTop_toBottomOf="@id/show_time_card_tv_film"
+            app:layout_constraintStart_toEndOf="@id/show_time_card_tv_cinema1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginLeft="20dp"
+            />
+        <TextView
+            android:id="@+id/show_time_card_tv_space2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" - "
+            app:layout_constraintStart_toEndOf="@id/show_time_card_tv_time2"
+            app:layout_constraintTop_toTopOf="@id/show_time_card_tv_time2" />
+
+        <TextView
+            android:id="@+id/show_time_card_tv_cinema2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Rạp 5"
+            android:textSize="14dp"
+            app:layout_constraintStart_toEndOf="@id/show_time_card_tv_space2"
+            app:layout_constraintTop_toTopOf="@id/show_time_card_tv_time2"
+            android:layout_marginRight="10dp"/>
+
+        <TextView
+            android:id="@+id/show_time_card_tv_time3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="18:00"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:textSize="14sp"
+            app:layout_constraintTop_toBottomOf="@id/show_time_card_tv_film"
+            app:layout_constraintStart_toEndOf="@id/show_time_card_tv_cinema2"
+            android:layout_marginLeft="20dp"
+            />
+        <TextView
+            android:id="@+id/show_time_card_tv_space3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" - "
+            app:layout_constraintStart_toEndOf="@id/show_time_card_tv_time3"
+            app:layout_constraintTop_toTopOf="@id/show_time_card_tv_time3" />
+
+        <TextView
+            android:id="@+id/show_time_card_tv_cinema3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Rạp 1"
+            android:textSize="14dp"
+            app:layout_constraintStart_toEndOf="@id/show_time_card_tv_space3"
+            app:layout_constraintTop_toTopOf="@id/show_time_card_tv_time3" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/show_time_card_btn_edit"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="22dp"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:minWidth="0dp"
+            app:icon="@drawable/edit_primary_24"
+            app:iconGravity="textEnd"
+            app:iconPadding="0dp"
+            app:iconSize="18dp"
+            app:iconTint="@color/primary"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/show_time_card_btn_delete"
+             />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/show_time_card_btn_delete"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="22dp"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:minWidth="0dp"
+            app:icon="@drawable/delete_primary_24"
+            app:iconPadding="0dp"
+            app:iconGravity="textEnd"
+            app:iconSize="18dp"
+            app:iconTint="@color/primary"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </com.google.android.material.card.MaterialCardView>
