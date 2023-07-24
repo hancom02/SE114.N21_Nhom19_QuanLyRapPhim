@@ -15,6 +15,22 @@
             android:id="@+id/employeeScreenGroup"
             android:icon="@drawable/delete_primary_24"
             android:title="Nhân viên" />
+        <item
+            android:id="@+id/cinemaRoomScreenGroup"
+            android:icon="@drawable/menu_phong_chieu"
+            android:title="Phòng chiếu" />
+        <item
+            android:id="@+id/refreshmentScreenGroup"
+            android:icon="@drawable/menu_food"
+            android:title="Đồ ăn" />
+        <item
+            android:id="@+id/timeSlotScreenGroup"
+            android:icon="@drawable/menu_time"
+            android:title="Khung giờ" />
+        <item
+            android:id="@+id/showTimeScreenGroup"
+            android:icon="@drawable/menu_time"
+            android:title="Lịch chiếu" />
     </group>
     <group
         android:id="@+id/nav_view_group_admin"

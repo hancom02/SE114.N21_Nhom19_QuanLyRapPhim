@@ -36,4 +36,87 @@
             android:label="Nhân viên"
             tools:layout="@layout/fragment_employee_screen" />
     </navigation>
+    <navigation
+        android:id="@+id/cinemaRoomScreenGroup"
+        app:startDestination="@id/cinemaRoomScreenFragment">
+        <fragment
+            android:id="@+id/cinemaRoomScreenFragment"
+            android:name="com.example.quanlyrapphim.CinemaRoomScreenFragment"
+            android:label="Phòng Chiếu"
+            tools:layout="@layout/fragment_cinemaroom_screen" >
+            <action
+                android:id="@+id/action_cinemaRoomScreenFragment_to_addCinemaRoomScreenFragment"
+                app:destination="@id/addCinemaRoomScreenFragment" />
+            <action
+                android:id="@+id/action_cinemaRoomScreenFragment_to_detailCinemaRoomScreenFragment"
+                app:destination="@id/detailCinemaRoomScreenFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/addCinemaRoomScreenFragment"
+            android:name="com.example.quanlyrapphim.AddCinemaRoomScreenFragment"
+            android:label="AddCinemaRoomScreenFragment" />
+        <fragment
+            android:id="@+id/detailCinemaRoomScreenFragment"
+            android:name="com.example.quanlyrapphim.AddCinemaRoomScreenFragment"
+            android:label="DetailCinemaRoomScreenFragment" />
+
+    </navigation>
+    <navigation
+        android:id="@+id/refreshmentScreenGroup"
+        app:startDestination="@id/refreshmentScreenFragment">
+        <fragment
+            android:id="@+id/refreshmentScreenFragment"
+            android:name="com.example.quanlyrapphim.RefreshmentScreenFragment"
+            android:label="RefreshmentFragment" >
+            <action
+                android:id="@+id/action_refreshmentScreenFragment_to_addRefreshmentScreenFragment"
+                app:destination="@id/addRefreshmentScreenFragment" />
+            <action
+                android:id="@+id/action_refreshmentScreenFragment_to_editRefreshmentScreenFragment"
+                app:destination="@id/editRefreshmentScreenFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/addRefreshmentScreenFragment"
+            android:name="com.example.quanlyrapphim.AddRefreshmentScreenFragment"
+            android:label="AddRefreshmentFragment" />
+        <fragment
+            android:id="@+id/editRefreshmentScreenFragment"
+            android:name="com.example.quanlyrapphim.EditFreshmentScreenFragment"
+            android:label="EditRefreshmentFragment" />
+
+    </navigation>
+    <navigation android:id="@+id/timeSlotScreenGroup"
+        app:startDestination="@id/timeSlotScreenFragment">
+        <fragment
+            android:id="@+id/timeSlotScreenFragment"
+            android:name="com.example.quanlyrapphim.TimeSlotScreenFragment"
+            android:label="TimeSlotScreenFragment" >
+
+            <action
+                android:id="@+id/action_timeSlotScreenFragment_to_addTimeSlotScreenFragment"
+                app:destination="@id/addTimeSlotScreenFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/addTimeSlotScreenFragment"
+            android:name="com.example.quanlyrapphim.AddTimeSlotScreenFragment"
+            android:label="AddTimeSlotScreenFragment" />
+    </navigation>
+    <navigation
+        android:id="@+id/showTimeScreenGroup"
+        app:startDestination="@id/showTimeScreenFragment">
+        <fragment
+            android:id="@+id/showTimeScreenFragment"
+            android:name="com.example.quanlyrapphim.ShowTimeScreenFragment"
+            android:label="ShowTimeScreenFragment" >
+            <action
+                android:id="@+id/action_showTimeScreenFragment_to_addShowTimeFragmentScreen"
+                app:destination="@id/addShowTimeFragmentScreen" />
+        </fragment>
+        <fragment
+            android:id="@+id/addShowTimeFragmentScreen"
+            android:name="com.example.quanlyrapphim.AddShowTimeFragmentScreen"
+            android:label="fragment_add_show_time_screen"
+
+            />
+    </navigation>
 </navigation>
