@@ -10,7 +10,7 @@ import com.example.quanlyrapphim.fragments.SelectMovieFragment;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
-import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
+//import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
 
 import android.os.Bundle;
 import android.widget.NumberPicker;
