@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout android:id="@+id/item_cinemaroom_root"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+        <!--    /* Moi item cinema room là 1 spinner*/-->
+        <TextView
+            android:id="@+id/item_cinemaroom_tv_name_room"
+            android:layout_width="210dp"
+            android:layout_height="48dp"
+            android:hint="Phong chieu"
+            android:textSize="18dp"
+            />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/item_cinemaroom_bt_chiTiet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="4dp"
+            app:cornerRadius="9999dp"
+            android:text="Chi tiết"
+            android:textAllCaps="false"/>
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/item_cinemaroom_bt_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="0dp"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            app:icon="@drawable/edit_primary_24"
+            app:iconSize="20dp"
+            app:cornerRadius="9999dp"
+            android:backgroundTint="@color/bg"
+            android:layout_marginRight="5dp"
+            />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/item_cinemaroom_bt_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="0dp"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            app:icon="@drawable/delete_primary_24"
+            app:iconSize="20dp"
+            app:cornerRadius="9999dp"
+            android:backgroundTint="@color/bg"
+            />
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>
