@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FilmDetailScreenFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- IMAGE -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="12dp">
+
+                <ImageView
+                    android:id="@+id/film_detail_screen_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:background="#ddd" />
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- TÊN -->
+            <TextView
+                android:id="@+id/film_detail_screen_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Film name"
+                android:textSize="24dp"
+                android:textStyle="bold"
+                android:textColor="#333"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Thể loại: "
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/film_detail_screen_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Hoạt hình"
+                    android:textColor="@color/primary"
+                    android:textSize="18dp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <!-- QUỐC GIA -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Quốc gia: "
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/film_detail_screen_country"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Việt Nam"
+                    android:textSize="16dp" />
+            </LinearLayout>
+
+            <!-- NGÀY CÔNG CHIẾU -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Ngày công chiếu: "
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/film_detail_screen_release_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="14/05/2034"
+                    android:textSize="16dp" />
+            </LinearLayout>
+
+            <!-- DIỄN VIÊN -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Diễn viên: "
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/film_detail_screen_cast"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Nguyễn Văn A, Trần Thị B"
+                    android:textSize="16dp" />
+            </LinearLayout>
+            <!-- NỘI DUNG -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Nội dung: "
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/film_detail_screen_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Nọi dung gi do của phim co the khá là dài ở đây. Nọi dung gi do của phim co the khá là dài ở đây. Nọi dung gi do của phim co the khá là dài ở đây. Nọi dung gi do của phim co the khá là dài ở đây. Nọi dung gi do của phim co the khá là dài ở đây" />
+            </LinearLayout>
+
+            <!-- NÚT -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:orientation="vertical">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/film_detail_screen_btn_edit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Sửa phim"
+                    app:cornerRadius="999dp"
+                    app:icon="@drawable/edit_primary_24"
+                    app:iconGravity="textStart"
+                    app:iconSize="20dp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/film_detail_screen_btn_delete"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="#f66"
+                    android:text="Xoá phim"
+                    app:cornerRadius="999dp"
+                    app:icon="@drawable/delete_primary_24"
+                    app:iconGravity="textStart"
+                    app:iconSize="20dp" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </ScrollView>
+
+</FrameLayout>

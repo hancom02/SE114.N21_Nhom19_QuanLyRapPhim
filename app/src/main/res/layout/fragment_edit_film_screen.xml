@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddFilmScreenFragment">
+    tools:context=".EditFilmScreenFragment">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -25,7 +25,7 @@
                 app:boxBackgroundColor="@color/white">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/add_film_screen_input_name"
+                    android:id="@+id/edit_film_screen_input_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
@@ -41,7 +41,7 @@
                 app:boxBackgroundColor="@color/white">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/add_film_screen_input_type"
+                    android:id="@+id/edit_film_screen_input_type"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
@@ -57,7 +57,7 @@
                 app:boxBackgroundColor="@color/white">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/add_film_screen_input_country"
+                    android:id="@+id/edit_film_screen_input_country"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
@@ -73,7 +73,7 @@
                 app:boxBackgroundColor="@color/white">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/add_film_screen_input_cast"
+                    android:id="@+id/edit_film_screen_input_cast"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     />
@@ -90,7 +90,7 @@
                 app:boxBackgroundColor="@color/white">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/add_film_screen_input_release_date"
+                    android:id="@+id/edit_film_screen_input_release_date"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:focusable="false" />
@@ -107,7 +107,7 @@
                 app:boxBackgroundColor="@color/white">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/add_film_screen_input_content"
+                    android:id="@+id/edit_film_screen_input_content"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="start"
@@ -142,7 +142,7 @@
                     </LinearLayout>
 
                     <ImageView
-                        android:id="@+id/add_film_screen_imv_image"
+                        android:id="@+id/edit_film_screen_imv_image"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:scaleType="centerCrop" />
@@ -150,7 +150,7 @@
 
 
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/add_film_screen_btn_remove_image"
+                    android:id="@+id/edit_film_screen_btn_remove_image"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
@@ -168,13 +168,13 @@
 
             </RelativeLayout>
 
-            <!--  NÚT THÊM  -->
+            <!--  NÚT CẬP NHẬT  -->
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/add_film_screen_btn_add"
+                android:id="@+id/edit_film_screen_btn_update"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:text="Thêm phim"
+                android:text="Cập nhật phim"
                 app:cornerRadius="999dp" />
         </LinearLayout>
     </ScrollView>
@@ -184,7 +184,7 @@
         android:layout_height="match_parent"
         android:gravity="center"
         android:background="#aaffffff"
-        android:id="@+id/add_film_screen_loading"
+        android:id="@+id/edit_film_screen_loading"
         android:visibility="gone"
         android:clickable="true"
         >
