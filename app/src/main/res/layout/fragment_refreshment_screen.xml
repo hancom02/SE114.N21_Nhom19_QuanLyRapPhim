@@ -24,32 +24,38 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
             </com.google.android.material.textfield.TextInputLayout>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/frmt_refreshment_rv_listRoom"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/frmt_refreshment_searchText"
-                app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginTop="20dp"
-                android:layout_weight="1"
-
-                />
-
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/frmt_refreshment_bt_addRoom"
-                app:layout_constraintTop_toBottomOf="@id/frmt_refreshment_rv_listRoom"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginTop="30dp"
+            
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/add_white_24"
-                android:backgroundTint="@color/primary"
-                android:tint="@color/white"
-                android:contentDescription="Thêm đồ ăn, thức uống"/>
+                android:text="Danh sach thuc an, nuoc uong:"
+                android:textSize="16dp"
+                app:layout_constraintTop_toBottomOf="@id/frmt_refreshment_searchText"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="60dp"/>
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/frmt_refreshment_rv_listRefreshment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="104dp"
+                android:layout_weight="1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/frmt_refreshment_searchText"
+                android:paddingBottom="180dp"
+                />
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/frmt_refreshment_bt_addRefreshment"
+            android:layout_gravity="right|bottom"
+            android:layout_marginTop="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/add_white_24"
+            android:backgroundTint="@color/primary"
+            android:tint="@color/white"
+            android:contentDescription="Thêm đồ ăn, thức uống"/>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </FrameLayout>
