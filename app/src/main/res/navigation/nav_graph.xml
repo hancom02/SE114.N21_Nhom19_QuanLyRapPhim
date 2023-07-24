@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/ticketScreenFragment"
-        android:name="com.example.quanlyrapphim.TicketScreenFragment"
+        android:name="com.example.quanlyrapphim.fragments.TicketScreenFragment"
         android:label="Bán vé"
         tools:layout="@layout/fragment_ticket_screen" />
     <navigation
@@ -15,7 +15,7 @@
         app:startDestination="@id/filmScreenFragment">
         <fragment
             android:id="@+id/filmScreenFragment"
-            android:name="com.example.quanlyrapphim.FilmScreenFragment"
+            android:name="com.example.quanlyrapphim.fragments.FilmScreenFragment"
             android:label="Danh sách phim"
             tools:layout="@layout/fragment_film_screen" >
             <action
@@ -24,7 +24,7 @@
         </fragment>
         <fragment
             android:id="@+id/addFilmScreenFragment"
-            android:name="com.example.quanlyrapphim.AddFilmScreenFragment"
+            android:name="com.example.quanlyrapphim.fragments.AddFilmScreenFragment"
             android:label="Thêm phim"
             tools:layout="@layout/fragment_add_film_screen" />
     </navigation>
@@ -32,7 +32,7 @@
         app:startDestination="@id/employeeScreenFragment">
         <fragment
             android:id="@+id/employeeScreenFragment"
-            android:name="com.example.quanlyrapphim.EmployeeScreenFragment"
+            android:name="com.example.quanlyrapphim.fragments.EmployeeScreenFragment"
             android:label="Nhân viên"
             tools:layout="@layout/fragment_employee_screen" />
     </navigation>
