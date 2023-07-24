@@ -2,57 +2,37 @@ package com.example.quanlyrapphim;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link TimeSlotScreenFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import com.example.quanlyrapphim.adapters.RefreshmentsRecyclerViewAdapter;
+import com.example.quanlyrapphim.adapters.TimeSlotRecyclerViewAdapter;
+import com.example.quanlyrapphim.models.Refreshment;
+import com.example.quanlyrapphim.models.TimeSlot;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import java.util.ArrayList;
+
 public class TimeSlotScreenFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public TimeSlotScreenFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment TimeSlotScreenFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static TimeSlotScreenFragment newInstance(String param1, String param2) {
-        TimeSlotScreenFragment fragment = new TimeSlotScreenFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+    private ArrayList<TimeSlot> timeSlotArrayList = new ArrayList<>();
+    private RecyclerView timeSlotRecyclerView;
+    private FloatingActionButton addTimeSlotBtn;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+        initTimeSlot();
     }
 
     @Override
@@ -60,5 +40,38 @@ public class TimeSlotScreenFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_time_slot_screen, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        timeSlotRecyclerView = view.findViewById(R.id.frmt_timeslot_rv_listTimeSlot);
+        addTimeSlotBtn = view.findViewById(R.id.frmt_timeslot_bt_addTimeSlot);
+
+        TimeSlotRecyclerViewAdapter adapter = new TimeSlotRecyclerViewAdapter(getActivity(), timeSlotArrayList);
+
+        adapter.setOnDeleteClickListener(i -> {
+            Toast.makeText(getActivity(), "Deleted item at " + i, Toast.LENGTH_SHORT).show();
+        });
+        adapter.setOnEditClickListener(i -> {
+            Toast.makeText(getActivity(), "Edit item at " + i, Toast.LENGTH_SHORT).show();
+//            Navigation.findNavController(view).navigate(R.id.action_refreshmentScreenFragment_to_editRefreshmentScreenFragment);
+        });
+        timeSlotRecyclerView.setAdapter(adapter);
+        timeSlotRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        addTimeSlotBtn.setOnClickListener(v -> {
+//            Toast.makeText(getActivity(), "Nav to add refreshment screen", Toast.LENGTH_SHORT).show();
+            Navigation.findNavController(view).navigate(R.id.action_timeSlotScreenFragment_to_addTimeSlotScreenFragment);
+        });
+    }
+
+    private void initTimeSlot() {
+        timeSlotArrayList.add(new TimeSlot("8:20", "11:00"));
+        timeSlotArrayList.add(new TimeSlot("9:20", "12:00"));
+        timeSlotArrayList.add(new TimeSlot("10:20", "13:00"));
+        timeSlotArrayList.add(new TimeSlot("11:20", "14:00"));
+        timeSlotArrayList.add(new TimeSlot("12:20", "15:00"));
     }
 }
