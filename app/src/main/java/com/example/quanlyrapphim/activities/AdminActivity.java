@@ -1,7 +1,6 @@
-package com.example.quanlyrapphim.viewmodels;
+package com.example.quanlyrapphim.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
@@ -9,10 +8,8 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -23,7 +20,7 @@ import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
-public class MainActivity extends AppCompatActivity {
+public class AdminActivity extends AppCompatActivity {
 
     private NavController navController;
     private BottomNavigationView bottomNavBar;
@@ -35,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_admin);
 
         // find ui
         toolbar = findViewById(R.id.toolbar);
@@ -59,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
         // config drawer navigation
         NavigationUI.setupWithNavController(navView, navController);
 
-        // todo: handle remove item in nav bar when not admin
+        // handle remove item in nav bar when not admin
 //        Intent intent = getIntent();
 //        String user = intent.getStringExtra("user");
 //        if (!user.equals("admin")) {

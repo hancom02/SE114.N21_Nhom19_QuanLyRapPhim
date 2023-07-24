@@ -1,27 +1,6 @@
 package com.example.quanlyrapphim.activities;
 
-import com.example.quanlyrapphim.R;
-import com.example.quanlyrapphim.fragments.BookingFoodFragment;
-import com.example.quanlyrapphim.fragments.BookingTicketFragment;
-import com.example.quanlyrapphim.fragments.ProfileFragment;
-import com.example.quanlyrapphim.fragments.StatisticTicketFragment;
-import com.example.quanlyrapphim.fragments.SelectMovieFragment;
-
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-
-//import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
-
-import android.os.Bundle;
-import android.widget.NumberPicker;
-import android.widget.Toast;
-
-import kotlin.Unit;
-import kotlin.jvm.functions.Function1;
-
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
@@ -29,10 +8,8 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -42,7 +19,6 @@ import com.example.quanlyrapphim.R;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
-
 
 public class StaffActivity extends AppCompatActivity {
 
@@ -138,7 +114,7 @@ public class StaffActivity extends AppCompatActivity {
         navController = navHostFragment.getNavController();
 
         // config app bar
-        appBarConfiguration = new AppBarConfiguration.Builder(R.id.filmScreenFragment, R.id.filmScreenFragment, R.id.employeeScreenFragment).setOpenableLayout(drawerLayout).build();
+        appBarConfiguration = new AppBarConfiguration.Builder(R.id.ticketScreenFragment, R.id.filmScreenFragment, R.id.employeeScreenFragment, R.id.cinemaRoomScreenFragment, R.id.refreshmentScreenFragment, R.id.timeSlotScreenFragment, R.id.showTimeScreenGroup).setOpenableLayout(drawerLayout).build();
 
         // config bottom navigation bar
         NavigationUI.setupWithNavController(bottomNavBar, navController);
@@ -149,7 +125,7 @@ public class StaffActivity extends AppCompatActivity {
         // config drawer navigation
         NavigationUI.setupWithNavController(navView, navController);
 
-        // todo: handle remove item in nav bar when not admin
+        // todo: handle remove item in nav bar
 //        Intent intent = getIntent();
 //        String user = intent.getStringExtra("user");
 //        if (!user.equals("admin")) {

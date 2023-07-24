@@ -40,7 +40,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".viewmodels.MainActivity"
+            android:name=".activities.AdminActivity"
             android:exported="false" />
         <activity
             android:name=".activities.StaffActivity"
