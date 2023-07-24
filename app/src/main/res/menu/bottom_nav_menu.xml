@@ -12,7 +12,7 @@
         android:title="Phim"
         app:showAsAction="ifRoom" />
     <item
-        android:id="@+id/employeeScreenGroup"
+        android:id="@+id/staffScreenGroup"
         android:icon="@drawable/edit_primary_24"
         android:title="Nhân viên"
         app:showAsAction="ifRoom" />

@@ -114,7 +114,7 @@ public class StaffActivity extends AppCompatActivity {
         navController = navHostFragment.getNavController();
 
         // config app bar
-        appBarConfiguration = new AppBarConfiguration.Builder(R.id.ticketScreenFragment, R.id.filmScreenFragment, R.id.employeeScreenFragment, R.id.cinemaRoomScreenFragment, R.id.refreshmentScreenFragment, R.id.timeSlotScreenFragment, R.id.showTimeScreenGroup).setOpenableLayout(drawerLayout).build();
+        appBarConfiguration = new AppBarConfiguration.Builder(R.id.ticketScreenFragment, R.id.filmScreenFragment, R.id.staffScreenFragment, R.id.cinemaRoomScreenFragment, R.id.refreshmentScreenFragment, R.id.timeSlotScreenFragment, R.id.showTimeScreenGroup).setOpenableLayout(drawerLayout).build();
 
         // config bottom navigation bar
         NavigationUI.setupWithNavController(bottomNavBar, navController);

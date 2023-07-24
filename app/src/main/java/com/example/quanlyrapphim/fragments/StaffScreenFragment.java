@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -42,7 +43,7 @@ public class StaffScreenFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         employeeRecyclerView = view.findViewById(R.id.employee_recycle_view);
-        btnAddEmployee = view.findViewById(R.id.employee_screen_btn_add_employee);
+        btnAddEmployee = view.findViewById(R.id.staff_screen_btn_add_staff);
 
         StaffRecyclerViewAdapter adapter = new StaffRecyclerViewAdapter(getActivity(), employees);
         adapter.setOnDeleteClickListener(i -> {
@@ -55,7 +56,7 @@ public class StaffScreenFragment extends Fragment {
         employeeRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         btnAddEmployee.setOnClickListener(v -> {
-//            Navigation.findNavController(view).navigate(R.id.action_filmScreenFragment_to_addFilmScreenFragment);
+            Navigation.findNavController(view).navigate(R.id.addStaffScreenFragment);
         });
     }
 

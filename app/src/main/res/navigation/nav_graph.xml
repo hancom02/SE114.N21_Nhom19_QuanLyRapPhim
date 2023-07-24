@@ -44,13 +44,18 @@
             android:label="Chỉnh sửa phim"
             tools:layout="@layout/fragment_edit_film_screen" />
     </navigation>
-    <navigation android:id="@+id/employeeScreenGroup"
-        app:startDestination="@id/employeeScreenFragment">
+    <navigation android:id="@+id/staffScreenGroup"
+        app:startDestination="@id/staffScreenFragment">
         <fragment
-            android:id="@+id/employeeScreenFragment"
+            android:id="@+id/staffScreenFragment"
             android:name="com.example.quanlyrapphim.fragments.StaffScreenFragment"
             android:label="Nhân viên"
             tools:layout="@layout/fragment_staff_screen" />
+        <fragment
+            android:id="@+id/addStaffScreenFragment"
+            android:name="com.example.quanlyrapphim.fragments.AddStaffScreenFragment"
+            android:label="Thêm nhân viên"
+            tools:layout="@layout/fragment_add_staff_screen" />
     </navigation>
     <navigation
         android:id="@+id/cinemaRoomScreenGroup"
