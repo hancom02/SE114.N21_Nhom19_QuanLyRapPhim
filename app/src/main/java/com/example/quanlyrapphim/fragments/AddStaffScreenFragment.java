@@ -13,7 +13,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,10 +26,15 @@ import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.example.quanlyrapphim.R;
+import com.example.quanlyrapphim.adapters.StaffRecyclerViewAdapter;
+import com.example.quanlyrapphim.models.Account;
 import com.example.quanlyrapphim.models.CreateAccount;
 import com.example.quanlyrapphim.models.CreateFilm;
+import com.example.quanlyrapphim.utils.ConfirmDeleteDialog;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.button.MaterialButtonToggleGroup;
 import com.google.android.material.datepicker.MaterialDatePicker;
@@ -35,10 +42,14 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.UUID;
 import java.util.regex.Pattern;
@@ -57,6 +68,7 @@ public class AddStaffScreenFragment extends Fragment {
     private Date birthday;
     private MaterialDatePicker datePicker = MaterialDatePicker.Builder.datePicker().setTitleText("Ngày sinh").build();
     private LinearLayout loading;
+    private ArrayList<Account> allAccounts = new ArrayList<>();
 
     ActivityResultLauncher<Intent> chooseImageActivityResultLauncher;
 
@@ -85,6 +97,24 @@ public class AddStaffScreenFragment extends Fragment {
                                     imvAvatar.setImageURI(selectedImageUri);
                                     btnRemoveAvatar.setVisibility(View.VISIBLE);
                                 }
+                            }
+                        }
+                    }
+                });
+
+        // GET ALL ACCOUNT
+        db.collection("accounts")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            allAccounts = new ArrayList<>();
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Account account = document.toObject(Account.class);
+                                account.setId(document.getId());
+
+                                allAccounts.add(account);
                             }
                         }
                     }
@@ -143,7 +173,7 @@ public class AddStaffScreenFragment extends Fragment {
             public void onButtonChecked(MaterialButtonToggleGroup group, int checkedId, boolean isChecked) {
                 Button btnSelected = view.findViewById(checkedId);
                 gender = btnSelected.getText().toString();
-                Toast.makeText(getActivity(), gender, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getActivity(), gender, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -165,6 +195,14 @@ public class AddStaffScreenFragment extends Fragment {
             if (!isValidEmail(inputEmail.getText().toString())) {
                 Toast.makeText(getActivity(), "Email không hợp lệ!", Toast.LENGTH_SHORT).show();
                 return;
+            }
+
+            // check exist email
+            for (Account account : allAccounts) {
+                if (inputEmail.getText().toString().equals(account.getEmail())) {
+                    Toast.makeText(getActivity(), "Email đã tồn tại!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
             }
 
 
@@ -241,7 +279,7 @@ public class AddStaffScreenFragment extends Fragment {
             }
             else {
                 // CREATE FILM IN FIRESTORE
-                db.collection("account")
+                db.collection("accounts")
                         .add(createAccount)
                         .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                             @Override

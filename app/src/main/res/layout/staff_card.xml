@@ -22,7 +22,8 @@
                 android:id="@+id/staff_card_avatar"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:scaleType="centerCrop" />
+                android:scaleType="centerCrop"
+                android:background="#ddd"/>
         </com.google.android.material.card.MaterialCardView>
 
         <LinearLayout
