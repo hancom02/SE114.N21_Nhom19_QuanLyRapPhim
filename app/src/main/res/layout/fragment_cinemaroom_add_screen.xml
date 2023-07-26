@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/item_cinemaroom_spinner_constrainlayout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/frg_cinemaroom_add_tv_id"
+        android:text="Tên phòng chiếu:"
+        android:textSize="16sp"
+        android:gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="70dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/frg_cinemaroom_add_etl_id"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:hint="Phòng chiếu xx"
+
+        app:layout_constraintTop_toTopOf="@id/frg_cinemaroom_add_tv_id"
+        app:layout_constraintEnd_toEndOf="parent"
+
+        >
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/frg_cinemaroom_add_et_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:inputType="text"
+            android:enabled="true"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/frg_cinemaroom_add_tv_row"
+        android:text="Số hàng ghế:"
+        android:textSize="16sp"
+        android:gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="70dp"
+        app:layout_constraintTop_toBottomOf="@id/frg_cinemaroom_add_tv_id"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/frg_cinemaroom_add_etl_row"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:hint="xx"
+        app:layout_constraintTop_toTopOf="@id/frg_cinemaroom_add_tv_row"
+        app:layout_constraintStart_toStartOf="@id/frg_cinemaroom_add_etl_id"
+        >
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/frg_cinemaroom_add_et_row"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:inputType="number"
+            android:enabled="true"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/frg_cinemaroom_add_tv_column"
+        android:text="Số cột ghế:"
+        android:textSize="16sp"
+        android:gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="70dp"
+        app:layout_constraintTop_toBottomOf="@id/frg_cinemaroom_add_tv_row"
+        app:layout_constraintStart_toStartOf="parent"/>
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/item_spinner_cinemaroom_etl_seats"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:hint="xx"
+        app:layout_constraintTop_toTopOf="@id/frg_cinemaroom_add_tv_column"
+        app:layout_constraintStart_toStartOf="@id/frg_cinemaroom_add_etl_id"
+        >
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/item_spinner_cinemaroom_et_seats"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:inputType="number"
+            android:enabled="true"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+<!--    <TextView-->
+<!--        android:id="@+id/frg_cinemaroom_add_tv_projetor"-->
+<!--        android:text="Máy chiếu:"-->
+<!--        android:textSize="16sp"-->
+<!--        android:gravity="center"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="70dp"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/frg_cinemaroom_add_tv_column"-->
+<!--        app:layout_constraintStart_toStartOf="parent"/>-->
+
+<!--    <androidx.appcompat.widget.AppCompatSpinner-->
+<!--        android:id="@+id/frg_cinemaroom_add_spinner_projector"-->
+<!--        android:contentDescription="Chọn một thiết bị từ danh sách"-->
+<!--        android:layout_width="250dp"-->
+<!--        android:layout_height="60dp"-->
+<!--        style="@style/Widget.AppCompat.DropDownItem.Spinner"-->
+<!--        app:layout_constraintTop_toTopOf="@id/frg_cinemaroom_add_tv_projetor"-->
+<!--        app:layout_constraintStart_toStartOf="@id/frg_cinemaroom_add_etl_id" />-->
+<!--    <TextView-->
+<!--        android:id="@+id/frg_cinemaroom_add_tv_screen"-->
+<!--        android:text="Màn hình:"-->
+<!--        android:textSize="16sp"-->
+<!--        android:gravity="center"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="70dp"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/frg_cinemaroom_add_tv_projetor"-->
+<!--        app:layout_constraintStart_toStartOf="parent"/>-->
+<!--    <androidx.appcompat.widget.AppCompatSpinner-->
+<!--        android:id="@+id/frg_cinemaroom_add_spinner_screen"-->
+<!--        android:contentDescription="Chọn một thiết bị từ danh sách"-->
+<!--        android:layout_width="250dp"-->
+<!--        android:layout_height="60dp"-->
+<!--        style="@style/Widget.AppCompat.DropDownItem.Spinner"-->
+<!--        app:layout_constraintTop_toTopOf="@id/frg_cinemaroom_add_tv_screen"-->
+<!--        app:layout_constraintStart_toStartOf="@id/frg_cinemaroom_add_etl_id" />-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/frg_cinemaroom_add_tv_speaker"-->
+<!--        android:text="Loa:"-->
+<!--        android:textSize="16sp"-->
+<!--        android:gravity="center"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="70dp"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/frg_cinemaroom_add_tv_screen"-->
+<!--        app:layout_constraintStart_toStartOf="parent"/>-->
+<!--    <androidx.appcompat.widget.AppCompatSpinner-->
+<!--        android:id="@+id/frg_cinemaroom_add_spinner_speaker"-->
+<!--        android:contentDescription="Chọn một thiết bị từ danh sách"-->
+<!--        android:layout_width="250dp"-->
+<!--        android:layout_height="60dp"-->
+<!--        style="@style/Widget.AppCompat.DropDownItem.Spinner"-->
+<!--        app:layout_constraintTop_toTopOf="@id/frg_cinemaroom_add_tv_speaker"-->
+<!--        app:layout_constraintStart_toStartOf="@id/frg_cinemaroom_add_etl_id" />-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/frg_cinemaroom_add_tv_lamp"-->
+<!--        android:text="Đèn:"-->
+<!--        android:textSize="16sp"-->
+<!--        android:gravity="center"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="70dp"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/frg_cinemaroom_add_tv_speaker"-->
+<!--        app:layout_constraintStart_toStartOf="parent"/>-->
+<!--    <androidx.appcompat.widget.AppCompatSpinner-->
+<!--        android:id="@+id/frg_cinemaroom_add_spinner_lamp"-->
+<!--        android:contentDescription="Chọn một thiết bị từ danh sách"-->
+<!--        android:layout_width="250dp"-->
+<!--        android:layout_height="60dp"-->
+<!--        style="@style/Widget.AppCompat.DropDownItem.Spinner"-->
+<!--        app:layout_constraintTop_toTopOf="@id/frg_cinemaroom_add_tv_lamp"-->
+<!--        app:layout_constraintStart_toStartOf="@id/frg_cinemaroom_add_etl_id" />-->
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/frg_cinemaroom_add_btn_add"
+        android:text="Thêm Phòng Chiếu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/frg_cinemaroom_add_tv_column"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:visibility="visible"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
