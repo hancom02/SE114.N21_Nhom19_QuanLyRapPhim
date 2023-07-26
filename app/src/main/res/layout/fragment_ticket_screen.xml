@@ -3,20 +3,94 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.TicketScreenFragment">
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:padding="16dp">
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/ticket_screen_seat_recycler_view"
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="4dp"
+                    android:text="Chọn phim"/>
+
+                <!-- LIST FILM -->
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/ticket_screen_film_recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <!-- SELECTED FILM -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/ticket_screen_selected_film_group"
+                    android:orientation="horizontal">
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_weight="1">
+                        <com.google.android.material.card.MaterialCardView
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            app:cardCornerRadius="8dp"
+                            >
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:id="@+id/ticket_screen_selected_film_image"
+                                android:scaleType="centerCrop"
+                                android:background="#ddd"
+                                />
+                        </com.google.android.material.card.MaterialCardView>
+                        <TextView
+                            android:layout_marginLeft="8dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/black"
+                            android:text="Example name of film"
+                            android:ellipsize="end"
+                            android:maxLines="2"
+                            android:id="@+id/ticket_screen_selected_film_name"/>
+                    </LinearLayout>
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/ticket_screen_remove_film"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginRight="12dp"
+                        android:backgroundTint="@color/white"
+                        android:minWidth="0dp"
+                        android:paddingHorizontal="6dp"
+                        app:cornerRadius="999dp"
+                        app:icon="@drawable/baseline_close_24"
+                        app:iconPadding="0dp"
+                        app:iconTint="#f44" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+<!--            <androidx.recyclerview.widget.RecyclerView-->
+<!--                android:id="@+id/ticket_screen_seat_recycler_view"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"/>-->
         </LinearLayout>
     </ScrollView>
 
