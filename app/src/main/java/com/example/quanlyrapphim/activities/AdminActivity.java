@@ -28,6 +28,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.firestore.DocumentReference;
@@ -113,6 +114,14 @@ public class AdminActivity extends AppCompatActivity implements GetCurrentAccoun
                         navCard.setOnClickListener(v -> {
                             navController.navigateUp();
                             navController.navigate(R.id.filmScreenGroup);
+                        });
+                        MaterialButton btnLogout = (MaterialButton) headerView.findViewById(R.id.drawer_header_logout);
+                        btnLogout.setOnClickListener(v-> {
+                            Intent intent = new Intent(AdminActivity.this, LoginActivity.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_TASK_ON_HOME);
+                            startActivity(intent);
+                            AdminActivity.this.finish();
+                            return;
                         });
                     } else {
                         Log.d("FILM_DETAIL", "No such document");

@@ -48,6 +48,13 @@
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
 
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:id="@+id/drawer_header_logout"
+        android:text="Đăng xuất"/>
+
 
     <com.google.android.material.divider.MaterialDivider
         android:layout_width="match_parent"

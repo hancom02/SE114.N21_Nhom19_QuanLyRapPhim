@@ -5,9 +5,19 @@
     android:layout_height="match_parent"
     tools:context=".fragments.TicketScreenFragment">
 
-    <TextView
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Ticket Screen" />
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="16dp">
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/ticket_screen_seat_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+    </ScrollView>
 
 </FrameLayout>
