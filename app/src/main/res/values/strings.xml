@@ -31,7 +31,7 @@
     <string name="registered_emailid">Please enter your Registered Email Id below:</string>
     <string name="submit">SUBMIT</string>
     <string name="back">BACK</string>
-    <string name="login_title">Chao mung tro lai</string>
+    <string name="login_title">Chào mừng trở lại</string>
     <string name="logo_email">Email</string>
 
 </resources>

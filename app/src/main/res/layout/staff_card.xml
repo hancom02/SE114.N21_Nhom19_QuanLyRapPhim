@@ -19,10 +19,11 @@
             app:cardCornerRadius="99999dp">
 
             <ImageView
-                android:id="@+id/employee_card_avatar"
+                android:id="@+id/staff_card_avatar"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:scaleType="centerCrop" />
+                android:scaleType="centerCrop"
+                android:background="#ddd"/>
         </com.google.android.material.card.MaterialCardView>
 
         <LinearLayout
@@ -34,7 +35,7 @@
             android:paddingHorizontal="12dp">
 
             <TextView
-                android:id="@+id/employee_card_name"
+                android:id="@+id/staff_card_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
@@ -44,7 +45,7 @@
                 android:textSize="16sp" />
 
             <TextView
-                android:id="@+id/employee_card_email"
+                android:id="@+id/staff_card_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
@@ -59,7 +60,7 @@
             android:orientation="horizontal">
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/employee_card_btn_edit"
+                android:id="@+id/staff_card_btn_edit"
                 style="@style/Widget.MaterialComponents.Button.TextButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -73,7 +74,7 @@
                 app:iconSize="20dp" />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/employee_card_btn_delete"
+                android:id="@+id/staff_card_btn_delete"
                 style="@style/Widget.MaterialComponents.Button.TextButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

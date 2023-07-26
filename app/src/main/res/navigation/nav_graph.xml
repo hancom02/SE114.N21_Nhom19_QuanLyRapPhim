@@ -56,6 +56,11 @@
             android:name="com.example.quanlyrapphim.fragments.AddStaffScreenFragment"
             android:label="Thêm nhân viên"
             tools:layout="@layout/fragment_add_staff_screen" />
+        <fragment
+            android:id="@+id/staffDetailScreenFragment"
+            android:name="com.example.quanlyrapphim.fragments.StaffDetailScreenFragment"
+            android:label="Thông tin nhân viên"
+            tools:layout="@layout/fragment_staff_detail_screen" />
     </navigation>
     <navigation
         android:id="@+id/cinemaRoomScreenGroup"
@@ -82,7 +87,7 @@
         <fragment
             android:id="@+id/detailCinemaRoomScreenFragment"
             android:name="com.example.quanlyrapphim.fragments.CinemaRoomDetailScreenFragment"
-            android:label="Chi Tiết Phòng Chiếu" >
+            android:label="Thông tin phòng chiếu" >
             <action
                 android:id="@+id/action_detailCinemaRoomScreenFragment_to_editCinemaRoomScreenFragment"
                 app:destination="@id/editCinemaRoomScreenFragment" />
@@ -94,7 +99,6 @@
             android:id="@+id/editCinemaRoomScreenFragment"
             android:name="com.example.quanlyrapphim.fragments.CinemaRoomEditScreenFragment"
             android:label="Chỉnh Sửa Phòng Chiếu" />
-
     </navigation>
     <navigation
         android:id="@+id/refreshmentScreenGroup"
