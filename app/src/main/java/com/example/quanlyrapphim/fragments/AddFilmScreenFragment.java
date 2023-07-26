@@ -147,11 +147,11 @@ public class AddFilmScreenFragment extends Fragment {
         btnAdd.setOnClickListener(v -> {
 
             if (
-                    inputName.getText().toString() == "" ||
-                            inputType.getText().toString() == "" ||
-                            inputCountry.getText().toString() == "" ||
-                            inputCast.getText().toString() == "" ||
-                            inputContent.getText().toString() == "" ||
+                    inputName.getText().toString().equals("") ||
+                            inputType.getText().toString().equals("") ||
+                            inputCountry.getText().toString().equals("") ||
+                            inputCast.getText().toString().equals("") ||
+                            inputContent.getText().toString().equals("") ||
                             pickedReleaseDate == null || filePath == null
             ) {
                 Toast.makeText(getActivity(), "Vui lòng nhập đầy đủ thông tin!", Toast.LENGTH_SHORT).show();

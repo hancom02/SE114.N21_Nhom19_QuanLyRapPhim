@@ -182,9 +182,9 @@ public class AddStaffScreenFragment extends Fragment {
         btnAdd.setOnClickListener(v -> {
 
             if (
-                    inputName.getText().toString() == "" ||
-                            inputEmail.getText().toString() == "" ||
-                            inputPassword.getText().toString() == "" ||
+                    inputName.getText().toString().equals("") ||
+                            inputEmail.getText().toString().equals("") ||
+                            inputPassword.getText().toString().equals("") ||
                             gender == null ||
                             birthday == null
             ) {
