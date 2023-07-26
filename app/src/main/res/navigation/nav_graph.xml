@@ -87,7 +87,7 @@
         <fragment
             android:id="@+id/detailCinemaRoomScreenFragment"
             android:name="com.example.quanlyrapphim.fragments.CinemaRoomDetailScreenFragment"
-            android:label="DetailCinemaRoomScreenFragment" >
+            android:label="Thông tin phòng chiếu" >
             <action
                 android:id="@+id/action_detailCinemaRoomScreenFragment_to_editCinemaRoomScreenFragment"
                 app:destination="@id/editCinemaRoomScreenFragment" />
@@ -98,7 +98,7 @@
         <fragment
             android:id="@+id/editCinemaRoomScreenFragment"
             android:name="com.example.quanlyrapphim.fragments.CinemaRoomEditScreenFragment"
-            android:label="EditCinemaRoomScreenFragment" />
+            android:label="Sửa phòng chiếu" />
 
     </navigation>
     <navigation
