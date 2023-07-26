@@ -25,6 +25,7 @@ public class StaffRecyclerViewAdapter extends RecyclerView.Adapter<StaffRecycler
     private ArrayList<Account> staffs;
     private RecyclerViewItemEventListener deleteClickListener;
     private RecyclerViewItemEventListener editClickListener;
+    private RecyclerViewItemEventListener clickListener;
 
     public StaffRecyclerViewAdapter(Context context, ArrayList<Account> staffs) {
         this.context = context;
@@ -51,6 +52,9 @@ public class StaffRecyclerViewAdapter extends RecyclerView.Adapter<StaffRecycler
         holder.btnEdit.setOnClickListener(view -> {
             editClickListener.onItemEvent(i);
         });
+        holder.card.setOnClickListener(view -> {
+            clickListener.onItemEvent(i);
+        });
     }
 
     @Override
@@ -65,6 +69,9 @@ public class StaffRecyclerViewAdapter extends RecyclerView.Adapter<StaffRecycler
     public void setOnEditClickListener(RecyclerViewItemEventListener listener) {
         editClickListener = listener;
     }
+    public void setOnClickListener(RecyclerViewItemEventListener listener) {
+        clickListener = listener;
+    }
 
     class MyViewHolder extends RecyclerView.ViewHolder {
         TextView tvName;
@@ -72,6 +79,7 @@ public class StaffRecyclerViewAdapter extends RecyclerView.Adapter<StaffRecycler
         ImageView imgAvatar;
         MaterialButton btnDelete;
         MaterialButton btnEdit;
+        View card;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -80,6 +88,7 @@ public class StaffRecyclerViewAdapter extends RecyclerView.Adapter<StaffRecycler
             imgAvatar = itemView.findViewById(R.id.staff_card_avatar);
             btnDelete = itemView.findViewById(R.id.staff_card_btn_delete);
             btnEdit = itemView.findViewById(R.id.staff_card_btn_edit);
+            card = itemView;
         }
     }
 

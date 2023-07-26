@@ -130,11 +130,11 @@ public class StaffScreenFragment extends Fragment {
                             });
 
                             // set click card
-//                            adapter.setOnClickListener(i -> {
-//                                Bundle bundle = new Bundle();
-//                                bundle.putString("filmId", staffs.get(i).getId());
-//                                Navigation.findNavController(view).navigate(R.id.action_filmScreenFragment_to_filmDetailScreenFragment, bundle);
-//                            });
+                            adapter.setOnClickListener(i -> {
+                                Bundle bundle = new Bundle();
+                                bundle.putString("staffId", staffs.get(i).getId());
+                                Navigation.findNavController(view).navigate(R.id.staffDetailScreenFragment, bundle);
+                            });
 
                             // set adapter
                             staffRecyclerView.setAdapter(adapter);

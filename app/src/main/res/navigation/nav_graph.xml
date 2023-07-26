@@ -56,6 +56,11 @@
             android:name="com.example.quanlyrapphim.fragments.AddStaffScreenFragment"
             android:label="Thêm nhân viên"
             tools:layout="@layout/fragment_add_staff_screen" />
+        <fragment
+            android:id="@+id/staffDetailScreenFragment"
+            android:name="com.example.quanlyrapphim.fragments.StaffDetailScreenFragment"
+            android:label="Thông tin nhân viên"
+            tools:layout="@layout/fragment_staff_detail_screen" />
     </navigation>
     <navigation
         android:id="@+id/cinemaRoomScreenGroup"
