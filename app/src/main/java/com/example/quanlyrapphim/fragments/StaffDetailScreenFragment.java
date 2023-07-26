@@ -19,6 +19,7 @@ import com.example.quanlyrapphim.R;
 import com.example.quanlyrapphim.models.Account;
 import com.example.quanlyrapphim.models.Film;
 import com.example.quanlyrapphim.utils.ConfirmDeleteDialog;
+import com.example.quanlyrapphim.utils.GetCurrentAccount;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -78,6 +79,10 @@ public class StaffDetailScreenFragment extends Fragment {
         gender = view.findViewById(R.id.staff_detail_screen_gender);
         birthday = view.findViewById(R.id.staff_detail_screen_birthday);
         btnDelete = view.findViewById(R.id.staff_detail_screen_btn_delete);
+
+        // todo: test get account
+        // GetCurrentAccount a = (GetCurrentAccount) getActivity();
+        // Account acc = a.getAccount();
 
         // Get from db
         DocumentReference docRef = db.collection("accounts").document(argStaffId);
