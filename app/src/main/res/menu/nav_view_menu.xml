@@ -5,32 +5,44 @@
         android:checkableBehavior="single">
         <item
             android:id="@+id/ticketScreenFragment"
-            android:icon="@drawable/delete_primary_24"
+            android:icon="@drawable/baseline_sticky_note_2_24"
             android:title="Vé" />
         <item
             android:id="@+id/filmScreenGroup"
-            android:icon="@drawable/delete_primary_24"
+            android:icon="@drawable/baseline_movie_24"
             android:title="Phim" />
         <item
             android:id="@+id/employeeScreenGroup"
-            android:icon="@drawable/delete_primary_24"
+            android:icon="@drawable/baseline_person_24"
             android:title="Nhân viên" />
         <item
             android:id="@+id/cinemaRoomScreenGroup"
-            android:icon="@drawable/menu_phong_chieu"
+            android:icon="@drawable/baseline_meeting_room_24"
             android:title="Phòng chiếu" />
         <item
             android:id="@+id/refreshmentScreenGroup"
-            android:icon="@drawable/menu_food"
+            android:icon="@drawable/baseline_fastfood_24"
             android:title="Đồ ăn" />
         <item
             android:id="@+id/timeSlotScreenGroup"
-            android:icon="@drawable/menu_time"
+            android:icon="@drawable/baseline_access_time_filled_24"
             android:title="Khung giờ" />
         <item
             android:id="@+id/showTimeScreenGroup"
-            android:icon="@drawable/menu_time"
+            android:icon="@drawable/baseline_live_tv_24"
             android:title="Lịch chiếu" />
+        <item
+            android:id="@+id/tempBooking"
+            android:icon="@drawable/baseline_sticky_note_2_24"
+            android:title="Đặt vé (chưa xong)" />
+        <item
+            android:id="@+id/statisticTicketFragment"
+            android:icon="@drawable/baseline_sticky_note_2_24"
+            android:title="Thống kê vé (chưa xong)" />
+        <item
+            android:id="@+id/profileFragment"
+            android:icon="@drawable/baseline_person_24"
+            android:title="Thông tin tài khoản (chưa xong)" />
     </group>
     <group
         android:id="@+id/nav_view_group_admin"
