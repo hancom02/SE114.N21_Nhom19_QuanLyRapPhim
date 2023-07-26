@@ -34,9 +34,6 @@ public class CinemaRoomAddScreenFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-//        addCinemaRoomBtn = addCinemaRoomBtn.findViewById(R.id.item_cinemaroom_spinner_bt_add);
-//        addCinemaRoomBtn.setVisibility(View.VISIBLE);
     }
 
     @Nullable
