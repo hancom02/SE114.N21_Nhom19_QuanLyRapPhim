@@ -31,6 +31,8 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.datepicker.MaterialDatePicker;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -51,8 +53,11 @@ public class TicketScreenFragment extends Fragment {
     private ImageView selectedFilmImage;
     private TextView selectedFilmName;
     private Film selectedFilm;
-    private Date date;
+    private TextInputEditText inputDate;
+    private Date selectedDate;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+    private MaterialDatePicker datePicker = MaterialDatePicker.Builder.datePicker().setTitleText("Chọn ngày chiếu").build();
 
 
     @Override
@@ -83,12 +88,23 @@ public class TicketScreenFragment extends Fragment {
         removeFilmBtn = view.findViewById(R.id.ticket_screen_remove_film);
         selectedFilmImage = view.findViewById(R.id.ticket_screen_selected_film_image);
         selectedFilmName = view.findViewById(R.id.ticket_screen_selected_film_name);
+        inputDate = view.findViewById(R.id.ticket_screen_input_date);
+
+        // Show date picker
+        inputDate.setOnClickListener(v -> {
+            if (!datePicker.isAdded()) {
+                datePicker.show(getParentFragmentManager(), "DATE_PICKER");
+            }
+            datePicker.addOnPositiveButtonClickListener(selection -> {
+                        inputDate.setText(datePicker.getHeaderText());
+                        selectedDate = new Date((Long) selection);
+                    }
+            );
+        });
 
         selectedFilmGroup.setVisibility(View.GONE);
         removeFilmBtn.setOnClickListener(v -> {
-            selectedFilm = null;
-            filmRecyclerView.setVisibility(View.VISIBLE);
-            selectedFilmGroup.setVisibility(View.GONE);
+            onRemoveFilm();
         });
 
         // Get films from db
@@ -140,6 +156,12 @@ public class TicketScreenFragment extends Fragment {
         selectedFilmGroup.setVisibility(View.VISIBLE);
         Picasso.get().load(film.getImage()).into(selectedFilmImage);
         selectedFilmName.setText(film.getName());
+    }
+
+    void onRemoveFilm() {
+        selectedFilm = null;
+        filmRecyclerView.setVisibility(View.VISIBLE);
+        selectedFilmGroup.setVisibility(View.GONE);
     }
 
     void initSeats() {
