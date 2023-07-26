@@ -31,7 +31,7 @@ public class FilmSpinnerAdapter extends ArrayAdapter<Film> {
 
         TextView tvFilm = convertView.findViewById(R.id.film_card_spinner_dropdown_tv_name);
 
-        Film film = <Film> this.getItem(position);
+        Film film = this.getItem(position);
 
         tvFilm.setText(film.getName());
         tvFilm.setSelected(true);
@@ -64,7 +64,7 @@ public class FilmSpinnerAdapter extends ArrayAdapter<Film> {
         ImageView imgFilm = convertView.findViewById(R.id.film_card_spinner_image);
         TextView tvFilm = convertView.findViewById(R.id.film_card_spinner_tv_name);
 
-        Film film = <Film> this.getItem(position);
+        Film film = this.getItem(position);
         if (film != null) {
             Picasso.get().load(film.getImage()).into(imgFilm);
             tvFilm.setText(film.getName());

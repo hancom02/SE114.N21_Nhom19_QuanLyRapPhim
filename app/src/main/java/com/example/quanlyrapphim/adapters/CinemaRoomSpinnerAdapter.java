@@ -33,7 +33,7 @@ public class CinemaRoomSpinnerAdapter extends ArrayAdapter<CinemaRoom> {
 
         TextView tvCinemaRoom = convertView.findViewById(R.id.cinemarom_card_spinner_tv);
 
-        CinemaRoom cinemaRoom = <CinemaRoom> this.getItem(position);
+        CinemaRoom cinemaRoom = this.getItem(position);
 
         tvCinemaRoom.setText(cinemaRoom.getName());
         tvCinemaRoom.setSelected(true);
@@ -66,7 +66,7 @@ public class CinemaRoomSpinnerAdapter extends ArrayAdapter<CinemaRoom> {
 
         TextView tvCinemaRoom = convertView.findViewById(R.id.cinemarom_card_spinner_tv);
 
-        CinemaRoom cinemaRoom = <CinemaRoom> this.getItem(position);
+        CinemaRoom cinemaRoom = this.getItem(position);
         if (cinemaRoom != null) {
             tvCinemaRoom.setText(cinemaRoom.getName());
         }

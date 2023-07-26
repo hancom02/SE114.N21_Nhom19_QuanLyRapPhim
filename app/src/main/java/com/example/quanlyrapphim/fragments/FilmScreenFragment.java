@@ -104,11 +104,9 @@ public class FilmScreenFragment extends Fragment {
                                                 .addOnFailureListener(new OnFailureListener() {
                                                     @Override
                                                     public void onFailure(@NonNull Exception e) {
-                                                        Toast.makeText(getActivity(), "Có lỗi xảy ra!", Toast.LENGTH_SHORT).show();
+                                                        Toast.makeText(getActivity(), "Xóa phòng chiếu xảy ra lỗi!", Toast.LENGTH_SHORT).show();
                                                     }
                                                 });
-
-
                                     }
                                 });
 

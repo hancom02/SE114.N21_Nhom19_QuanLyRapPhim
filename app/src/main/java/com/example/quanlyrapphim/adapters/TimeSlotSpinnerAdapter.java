@@ -35,7 +35,7 @@ public class TimeSlotSpinnerAdapter extends ArrayAdapter<TimeSlot> {
         TextView tvStart = convertView.findViewById(R.id.time_slot_card_spinner_tv_start);
         TextView tvEnd = convertView.findViewById(R.id.time_slot_card_spinner_tv_end);
 
-        TimeSlot timeSlot = <TimeSlot> this.getItem(position);
+        TimeSlot timeSlot = this.getItem(position);
 
         tvStart.setText(timeSlot.getStart());
         tvEnd.setText(timeSlot.getEnd());
@@ -68,7 +68,7 @@ public class TimeSlotSpinnerAdapter extends ArrayAdapter<TimeSlot> {
         TextView tvStart = convertView.findViewById(R.id.time_slot_card_spinner_tv_start);
         TextView tvEnd = convertView.findViewById(R.id.time_slot_card_spinner_tv_end);
 
-        TimeSlot timeSlot = <TimeSlot> this.getItem(position);
+        TimeSlot timeSlot = this.getItem(position);
         if (timeSlot != null) {
             tvStart.setText(timeSlot.getStart());
             tvEnd.setText(timeSlot.getEnd());
