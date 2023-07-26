@@ -1,6 +1,8 @@
 package com.example.quanlyrapphim.fragments;
 
+import android.app.DownloadManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +18,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.quanlyrapphim.R;
 import com.example.quanlyrapphim.adapters.CinemaRoomRecyclerViewAdapter;
 import com.example.quanlyrapphim.models.CinemaRoom;
+import com.example.quanlyrapphim.utils.ConfirmDeleteDialog;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
@@ -24,6 +35,8 @@ public class CinemaRoomScreenFragment extends Fragment {
     private ArrayList<CinemaRoom> cinemaRoomArrayList = new ArrayList<>();
     private RecyclerView cinemaRecyclerView;
     private FloatingActionButton addCinemaRoomBtn;
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    ConfirmDeleteDialog confirmDeleteDialog = new ConfirmDeleteDialog();
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -43,20 +56,89 @@ public class CinemaRoomScreenFragment extends Fragment {
 
         addCinemaRoomBtn = view.findViewById(R.id.frmt_cinemaroom_bt_addRoom);
 
-        CinemaRoomRecyclerViewAdapter adapter = new CinemaRoomRecyclerViewAdapter(getActivity(), cinemaRoomArrayList);
-        adapter.setOnDetailClickListener(i -> {
-//            Toast.makeText(getActivity(), "Detail cinema room at " + i, Toast.LENGTH_SHORT).show();
-            Navigation.findNavController(view).navigate(R.id.action_cinemaRoomScreenFragment_to_detailCinemaRoomScreenFragment);
-        });
-        adapter.setOnEditClickListener(i -> {
-            Toast.makeText(getActivity(), "Edit cinema room at " + i, Toast.LENGTH_SHORT).show();
-        });
-        adapter.setOnDeleteClickListener(i -> {
-            Toast.makeText(getActivity(), "Delete cinema room at " + i, Toast.LENGTH_SHORT).show();
-        });
+        db.collection("theaters")
+                .orderBy("name", Query.Direction.ASCENDING)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            cinemaRoomArrayList = new ArrayList<CinemaRoom>();
+                            for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
+
+                                Log.d("GET CINEMAROOM", documentSnapshot.getId() + documentSnapshot.getData());
+
+                                CinemaRoom cinemaRoom = documentSnapshot.toObject(CinemaRoom.class);
+                                cinemaRoom.setId(documentSnapshot.getId());
+                                cinemaRoomArrayList.add(cinemaRoom);
+                            }
+
+                            // SET CINEMAROOM LIST TO VIEW
+                            CinemaRoomRecyclerViewAdapter adapter = new CinemaRoomRecyclerViewAdapter(getActivity(), cinemaRoomArrayList);
+
+                            adapter.setOnDetailClickListener(i -> {
+//                          Toast.makeText(getActivity(), "Detail cinema room at " + i, Toast.LENGTH_SHORT).show();
+                                Bundle bundle = new Bundle();
+                                bundle.putString("cinemaRoomId", cinemaRoomArrayList.get(i).getId());
+                                Navigation.findNavController(view).navigate(R.id.action_cinemaRoomScreenFragment_to_detailCinemaRoomScreenFragment, bundle);
+                            });
+
+                            adapter.setOnEditClickListener(i -> {
+//                                Toast.makeText(getActivity(), "Edit cinema room at " + i, Toast.LENGTH_SHORT).show();
+                                Bundle bundle = new Bundle();
+                                bundle.putString("cinemaRoomId", cinemaRoomArrayList.get(i).getId());
+                                Navigation.findNavController(view).navigate(R.id.action_cinemaRoomScreenFragment_to_editCinemaRoomScreenFragment, bundle);
+
+                            });
+
+                            adapter.setOnDeleteClickListener(i -> {
+//                                Toast.makeText(getActivity(), "Delete cinema room at " + i, Toast.LENGTH_SHORT).show();
+
+                                confirmDeleteDialog.setDeleteListener(new ConfirmDeleteDialog.OnDeleteListener() {
+                                    @Override
+                                    public void onDeleteClick() {
+                                        String id = cinemaRoomArrayList.get(i).getId();
+
+                                        // HANDLE DELETE FILM
+                                        db.collection("theaters").document(id)
+                                                .delete()
+                                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                    @Override
+                                                    public void onSuccess(Void aVoid) {
+                                                        Toast.makeText(getActivity(), "Xoá phim thành công", Toast.LENGTH_SHORT).show();
+
+                                                        // delete in ui
+                                                        cinemaRoomArrayList.remove(i);
+                                                        adapter.notifyDataSetChanged();
+                                                    }
+                                                })
+                                                .addOnFailureListener(new OnFailureListener() {
+                                                    @Override
+                                                    public void onFailure(@NonNull Exception e) {
+                                                        Toast.makeText(getActivity(), "Có lỗi xảy ra!", Toast.LENGTH_SHORT).show();
+                                                    }
+                                                });
+
+
+                                    }
+                                });
+
+                                if (!confirmDeleteDialog.isAdded()) {
+                                    confirmDeleteDialog.show(getParentFragmentManager(), "DeleteDialog");
+                                }
+
+                            });
 //
-        cinemaRecyclerView.setAdapter(adapter);
-        cinemaRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+                            cinemaRecyclerView.setAdapter(adapter);
+                            cinemaRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+                        }
+                        else {
+                            Log.d("GET_CINEMAROOM","ERROR IN GET CINEMAROOM", task.getException());
+                        }
+                    }
+                });
+
 
         addCinemaRoomBtn.setOnClickListener(v -> {
             Navigation.findNavController(view).navigate(R.id.action_cinemaRoomScreenFragment_to_addCinemaRoomScreenFragment);
