@@ -12,7 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.quanlyrapphim.R;
-import com.example.quanlyrapphim.models.Employee;
+import com.example.quanlyrapphim.models.Account;
 import com.example.quanlyrapphim.utils.RecyclerViewItemEventListener;
 import com.google.android.material.button.MaterialButton;
 import com.squareup.picasso.Picasso;
@@ -22,13 +22,13 @@ import java.util.ArrayList;
 public class StaffRecyclerViewAdapter extends RecyclerView.Adapter<StaffRecyclerViewAdapter.MyViewHolder> {
 
     private Context context;
-    private ArrayList<Employee> employees;
+    private ArrayList<Account> staffs;
     private RecyclerViewItemEventListener deleteClickListener;
     private RecyclerViewItemEventListener editClickListener;
 
-    public StaffRecyclerViewAdapter(Context context, ArrayList<Employee> employees) {
+    public StaffRecyclerViewAdapter(Context context, ArrayList<Account> staffs) {
         this.context = context;
-        this.employees = employees;
+        this.staffs = staffs;
     }
 
     @NonNull
@@ -42,8 +42,9 @@ public class StaffRecyclerViewAdapter extends RecyclerView.Adapter<StaffRecycler
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int i) {
-        holder.tvName.setText(employees.get(i).getName());
-        Picasso.get().load(employees.get(i).getAvatar()).into(holder.imgAvatar);
+        holder.tvName.setText(staffs.get(i).getName());
+        holder.tvEmail.setText(staffs.get(i).getEmail());
+        Picasso.get().load(staffs.get(i).getAvatar()).into(holder.imgAvatar);
         holder.btnDelete.setOnClickListener(view -> {
             deleteClickListener.onItemEvent(i);
         });
@@ -54,7 +55,7 @@ public class StaffRecyclerViewAdapter extends RecyclerView.Adapter<StaffRecycler
 
     @Override
     public int getItemCount() {
-        return employees.size();
+        return staffs.size();
     }
 
     public void setOnDeleteClickListener(RecyclerViewItemEventListener listener) {
@@ -74,11 +75,11 @@ public class StaffRecyclerViewAdapter extends RecyclerView.Adapter<StaffRecycler
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            tvName = itemView.findViewById(R.id.employee_card_name);
-            tvEmail = itemView.findViewById(R.id.employee_card_email);
-            imgAvatar = itemView.findViewById(R.id.employee_card_avatar);
-            btnDelete = itemView.findViewById(R.id.employee_card_btn_delete);
-            btnEdit = itemView.findViewById(R.id.employee_card_btn_edit);
+            tvName = itemView.findViewById(R.id.staff_card_name);
+            tvEmail = itemView.findViewById(R.id.staff_card_email);
+            imgAvatar = itemView.findViewById(R.id.staff_card_avatar);
+            btnDelete = itemView.findViewById(R.id.staff_card_btn_delete);
+            btnEdit = itemView.findViewById(R.id.staff_card_btn_edit);
         }
     }
 

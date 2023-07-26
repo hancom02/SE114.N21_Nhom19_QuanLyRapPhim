@@ -9,27 +9,39 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.quanlyrapphim.R;
+import com.example.quanlyrapphim.adapters.FilmRecyclerViewAdapter;
 import com.example.quanlyrapphim.adapters.StaffRecyclerViewAdapter;
-import com.example.quanlyrapphim.models.Employee;
+import com.example.quanlyrapphim.models.Account;
+import com.example.quanlyrapphim.utils.ConfirmDeleteDialog;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
 public class StaffScreenFragment extends Fragment {
 
-    private ArrayList<Employee> employees = new ArrayList<>();
-    private RecyclerView employeeRecyclerView;
+    private ArrayList<Account> staffs = new ArrayList<>();
+    private RecyclerView staffRecyclerView;
     private FloatingActionButton btnAddEmployee;
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    ConfirmDeleteDialog confirmDeleteDialog = new ConfirmDeleteDialog();
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        initEmployees();
     }
 
     @Override
@@ -42,39 +54,102 @@ public class StaffScreenFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        employeeRecyclerView = view.findViewById(R.id.employee_recycle_view);
+        staffRecyclerView = view.findViewById(R.id.staff_recycle_view);
         btnAddEmployee = view.findViewById(R.id.staff_screen_btn_add_staff);
 
-        StaffRecyclerViewAdapter adapter = new StaffRecyclerViewAdapter(getActivity(), employees);
-        adapter.setOnDeleteClickListener(i -> {
-            Toast.makeText(getActivity(), "Deleted item at " + i, Toast.LENGTH_SHORT).show();
-        });
-        adapter.setOnEditClickListener(i -> {
-            Toast.makeText(getActivity(), "Edit item at " + i, Toast.LENGTH_SHORT).show();
-        });
-        employeeRecyclerView.setAdapter(adapter);
-        employeeRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        // Get staff from db
+        db.collection("accounts")
+                .orderBy("createdAt", Query.Direction.DESCENDING)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            staffs = new ArrayList<>();
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Log.d("GET_ACCOUNT", document.getId() + " => " + document.getData());
+                                Account account = document.toObject(Account.class);
+                                account.setId(document.getId());
+
+                                Log.i("GET_ACCOUNT", account.getRole());
+
+                                // check if account is staff
+                                if (account.getRole().equals("staff")) {
+
+                                    staffs.add(account);
+                                }
+                            }
+
+
+                            // SET TO VIEW
+
+                            StaffRecyclerViewAdapter adapter = new StaffRecyclerViewAdapter(getActivity(), staffs);
+
+                            // set delete btn
+                            adapter.setOnDeleteClickListener(i -> {
+
+                                confirmDeleteDialog.setDeleteListener(new ConfirmDeleteDialog.OnDeleteListener() {
+                                    @Override
+                                    public void onDeleteClick() {
+                                        String id = staffs.get(i).getId();
+
+                                        // HANDLE DELETE STAFF
+                                        db.collection("accounts").document(id)
+                                                .delete()
+                                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                    @Override
+                                                    public void onSuccess(Void aVoid) {
+                                                        Toast.makeText(getActivity(), "Xoá nhân viên thành công", Toast.LENGTH_SHORT).show();
+
+                                                        // delete in ui
+                                                        staffs.remove(i);
+                                                        adapter.notifyDataSetChanged();
+                                                    }
+                                                })
+                                                .addOnFailureListener(new OnFailureListener() {
+                                                    @Override
+                                                    public void onFailure(@NonNull Exception e) {
+                                                        Toast.makeText(getActivity(), "Có lỗi xảy ra!", Toast.LENGTH_SHORT).show();
+                                                    }
+                                                });
+
+
+                                    }
+                                });
+
+                                if (!confirmDeleteDialog.isAdded()) {
+                                    confirmDeleteDialog.show(getParentFragmentManager(), "DeleteDialog");
+                                }
+                            });
+
+                            // set edit btn
+                            adapter.setOnEditClickListener(i -> {
+                                //Toast.makeText(getActivity(), "Edit item at " + i, Toast.LENGTH_SHORT).show();
+
+                            });
+
+                            // set click card
+//                            adapter.setOnClickListener(i -> {
+//                                Bundle bundle = new Bundle();
+//                                bundle.putString("filmId", staffs.get(i).getId());
+//                                Navigation.findNavController(view).navigate(R.id.action_filmScreenFragment_to_filmDetailScreenFragment, bundle);
+//                            });
+
+                            // set adapter
+                            staffRecyclerView.setAdapter(adapter);
+                            staffRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+                        } else {
+                            Log.d("GET_FILM", "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
 
         btnAddEmployee.setOnClickListener(v -> {
             Navigation.findNavController(view).navigate(R.id.addStaffScreenFragment);
         });
     }
 
-    private void initEmployees() {
-        employees.add(new Employee("Midnight Whispers", "minhchau@gmail.com","https://images.unsplash.com/photo-1590179068383-b9c69aacebd3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8ZmlsbSUyMHBvc3RlcnxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60"));
-        employees.add(new Employee("Shattered Dreams of Yesterday", "chauminh@gmail.com", "https://images.unsplash.com/photo-1578655858279-e17d055eafd0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fGZpbG0lMjBwaG90b2dyYXBoeXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60"));
-        employees.add(new Employee("I don't want to code in java!", "asfasdf@fasd.cd", "https://images.unsplash.com/photo-1543487945-139a97f387d5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8cG9zdGVyfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60"));
-        employees.add(new Employee("The Enigma's Hidden Legacy", "asfasdf@fasd.cd","https://images.unsplash.com/photo-1583407723467-9b2d22504831?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fHBvc3RlcnxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60"));
-        employees.add(new Employee("Serendipity's Dance", "asfasdf@fasd.cd", "https://plus.unsplash.com/premium_photo-1668051042204-038187cac123?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8YW5pbWV8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60"));
-        employees.add(new Employee("Midnight Whispers", "minhchau@gmail.com","https://images.unsplash.com/photo-1590179068383-b9c69aacebd3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8ZmlsbSUyMHBvc3RlcnxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60"));
-        employees.add(new Employee("Shattered Dreams of Yesterday", "chauminh@gmail.com", "https://images.unsplash.com/photo-1578655858279-e17d055eafd0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fGZpbG0lMjBwaG90b2dyYXBoeXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60"));
-        employees.add(new Employee("I don't want to code in java!", "asfasdf@fasd.cd", "https://images.unsplash.com/photo-1543487945-139a97f387d5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8cG9zdGVyfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60"));
-        employees.add(new Employee("The Enigma's Hidden Legacy", "asfasdf@fasd.cd","https://images.unsplash.com/photo-1583407723467-9b2d22504831?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fHBvc3RlcnxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60"));
-        employees.add(new Employee("Serendipity's Dance", "asfasdf@fasd.cd", "https://plus.unsplash.com/premium_photo-1668051042204-038187cac123?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8YW5pbWV8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60"));
-        employees.add(new Employee("Midnight Whispers", "minhchau@gmail.com","https://images.unsplash.com/photo-1590179068383-b9c69aacebd3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8ZmlsbSUyMHBvc3RlcnxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60"));
-        employees.add(new Employee("Shattered Dreams of Yesterday", "chauminh@gmail.com", "https://images.unsplash.com/photo-1578655858279-e17d055eafd0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fGZpbG0lMjBwaG90b2dyYXBoeXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60"));
-        employees.add(new Employee("I don't want to code in java!", "asfasdf@fasd.cd", "https://images.unsplash.com/photo-1543487945-139a97f387d5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8cG9zdGVyfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60"));
-        employees.add(new Employee("The Enigma's Hidden Legacy", "asfasdf@fasd.cd","https://images.unsplash.com/photo-1583407723467-9b2d22504831?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fHBvc3RlcnxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60"));
-        employees.add(new Employee("Serendipity's Dance", "asfasdf@fasd.cd", "https://plus.unsplash.com/premium_photo-1668051042204-038187cac123?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8YW5pbWV8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60"));
-    }
+
 }
