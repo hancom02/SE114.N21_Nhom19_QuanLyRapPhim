@@ -71,15 +71,29 @@
             <action
                 android:id="@+id/action_cinemaRoomScreenFragment_to_detailCinemaRoomScreenFragment"
                 app:destination="@id/detailCinemaRoomScreenFragment" />
+            <action
+                android:id="@+id/action_cinemaRoomScreenFragment_to_editCinemaRoomScreenFragment"
+                app:destination="@id/editCinemaRoomScreenFragment" />
         </fragment>
         <fragment
             android:id="@+id/addCinemaRoomScreenFragment"
-            android:name="com.example.quanlyrapphim.fragments.AddCinemaRoomScreenFragment"
+            android:name="com.example.quanlyrapphim.fragments.CinemaRoomAddScreenFragment"
             android:label="AddCinemaRoomScreenFragment" />
         <fragment
             android:id="@+id/detailCinemaRoomScreenFragment"
-            android:name="com.example.quanlyrapphim.fragments.AddCinemaRoomScreenFragment"
-            android:label="DetailCinemaRoomScreenFragment" />
+            android:name="com.example.quanlyrapphim.fragments.CinemaRoomDetailScreenFragment"
+            android:label="DetailCinemaRoomScreenFragment" >
+            <action
+                android:id="@+id/action_detailCinemaRoomScreenFragment_to_editCinemaRoomScreenFragment"
+                app:destination="@id/editCinemaRoomScreenFragment" />
+            <action
+                android:id="@+id/action_detailCinemaRoomScreenFragment_to_addCinemaRoomScreenFragment"
+                app:destination="@id/addCinemaRoomScreenFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/editCinemaRoomScreenFragment"
+            android:name="com.example.quanlyrapphim.fragments.CinemaRoomEditScreenFragment"
+            android:label="EditCinemaRoomScreenFragment" />
 
     </navigation>
     <navigation
