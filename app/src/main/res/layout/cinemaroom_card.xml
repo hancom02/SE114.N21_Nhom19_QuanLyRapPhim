@@ -11,8 +11,9 @@
         <!--    /* Moi item cinema room là 1 spinner*/-->
         <TextView
             android:id="@+id/item_cinemaroom_tv_name_room"
-            android:layout_width="210dp"
+            android:layout_width="wrap_content"
             android:layout_height="48dp"
+            android:layout_weight="1"
             android:hint="Phong chieu"
             android:textSize="18dp"
             />

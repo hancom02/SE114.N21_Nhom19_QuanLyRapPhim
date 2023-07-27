@@ -110,7 +110,7 @@
             android:hint="Nhập mật khẩu"
             android:imeOptions="actionNext"
             android:importantForAutofill="no"
-            android:inputType="text"
+            android:inputType="textPassword"
             android:nextFocusForward="@+id/login_pinCode"
             android:paddingStart="12dp"
             android:singleLine="true">

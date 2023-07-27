@@ -13,6 +13,8 @@ import androidx.navigation.Navigation;
 
 import com.example.quanlyrapphim.R;
 import com.example.quanlyrapphim.models.CreateCinemaRoom;
+import com.example.quanlyrapphim.models.CreateTimeSlot;
+import com.example.quanlyrapphim.models.TimeSlot;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.button.MaterialButton;
@@ -20,17 +22,11 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.storage.FirebaseStorage;
 
-public class CinemaRoomAddScreenFragment extends Fragment {
-    private TextInputEditText etName;
-    private TextInputEditText etRowSeats;
-    private TextInputEditText etColumnSeats;
-    private MaterialButton addCinemaRoomBtn;
-
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private FirebaseStorage storage = FirebaseStorage.getInstance();
-
+public class TimeSlotAddScreenFragment extends Fragment {
+    private TextInputEditText etStart;
+    private TextInputEditText etEnd;
+    private MaterialButton btnAdd;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,7 +35,7 @@ public class CinemaRoomAddScreenFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_cinemaroom_add_screen, container, false);
+        View view = inflater.inflate(R.layout.fragment_time_slot_add, container, false);
         return view;
     }
 
@@ -47,44 +43,41 @@ public class CinemaRoomAddScreenFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        etName = view.findViewById(R.id.frg_cinemaroom_add_et_name);
-        etRowSeats = view.findViewById(R.id.frg_cinemaroom_add_et_row);
-        etColumnSeats = view.findViewById(R.id.item_spinner_cinemaroom_et_seats);
-        addCinemaRoomBtn = view.findViewById(R.id.frg_cinemaroom_add_btn_add);
+        etStart = view.findViewById(R.id.frg_timeslot_add_et_start);
+        etEnd = view.findViewById(R.id.frg_timeslot_add_et_end);
+        btnAdd = view.findViewById(R.id.frg_timeslot_add_btn_add);
 
-        addCinemaRoomBtn.setOnClickListener(v -> {
+        btnAdd.setOnClickListener(v -> {
             if (
-                    etColumnSeats.getText().toString() == "" ||
-                            etRowSeats.getText().toString() == "" ||
-                            etName.getText().toString() == ""
+                    etStart.getText().toString() == "" ||
+                            etEnd.getText().toString() == ""
             ) {
                 Toast.makeText(getActivity(), "Vui lòng nhập đủ thông tin!", Toast.LENGTH_SHORT).show();
                 return;
             }
 
-            CreateCinemaRoom createCinemaRoom = new CreateCinemaRoom(
-                    etName.getText().toString(),
-                    Integer.parseInt(etRowSeats.getText().toString()),
-                    Integer.parseInt(etColumnSeats.getText().toString())
+            CreateTimeSlot createTimeSlot = new CreateTimeSlot(
+                    etStart.getText().toString(),
+                    etEnd.getText().toString()
             );
 
-            //Thêm CinemaRoom vao FireStore
-            CollectionReference cinemaRoomsRef = FirebaseFirestore.getInstance().collection("theaters");
-            cinemaRoomsRef.add(createCinemaRoom)
+            //Thêm TimeSlot vao FireStore
+            CollectionReference timeSlotsRef = FirebaseFirestore.getInstance().collection("timeSlots");
+            timeSlotsRef.add(createTimeSlot)
                     .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                         @Override
                         public void onSuccess(DocumentReference documentReference) {
-                            Toast.makeText(getActivity(), "Thêm CinameRoom thành công!", Toast.LENGTH_SHORT).show();
-                            Navigation.findNavController(view).navigate(R.id.cinemaRoomScreenFragment);
+                            Toast.makeText(getActivity(), "Thêm TimeSlot thành công!", Toast.LENGTH_SHORT).show();
+                            Navigation.findNavController(view).navigate(R.id.timeSlotScreenFragment);
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(getActivity(), "Thêm CinameRoom thất bại!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), "Thêm TimeSlot thất bại!", Toast.LENGTH_SHORT).show();
                         }
                     });
         } );
+
     }
 }
-

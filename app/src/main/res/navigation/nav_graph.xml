@@ -83,11 +83,11 @@
         <fragment
             android:id="@+id/addCinemaRoomScreenFragment"
             android:name="com.example.quanlyrapphim.fragments.CinemaRoomAddScreenFragment"
-            android:label="AddCinemaRoomScreenFragment" />
+            android:label="Thêm Phòng Chiếu" />
         <fragment
             android:id="@+id/detailCinemaRoomScreenFragment"
             android:name="com.example.quanlyrapphim.fragments.CinemaRoomDetailScreenFragment"
-            android:label="DetailCinemaRoomScreenFragment" >
+            android:label="Thông tin phòng chiếu" >
             <action
                 android:id="@+id/action_detailCinemaRoomScreenFragment_to_editCinemaRoomScreenFragment"
                 app:destination="@id/editCinemaRoomScreenFragment" />
@@ -98,8 +98,7 @@
         <fragment
             android:id="@+id/editCinemaRoomScreenFragment"
             android:name="com.example.quanlyrapphim.fragments.CinemaRoomEditScreenFragment"
-            android:label="EditCinemaRoomScreenFragment" />
-
+            android:label="Chỉnh Sửa Phòng Chiếu" />
     </navigation>
     <navigation
         android:id="@+id/refreshmentScreenGroup"
@@ -107,7 +106,7 @@
         <fragment
             android:id="@+id/refreshmentScreenFragment"
             android:name="com.example.quanlyrapphim.fragments.RefreshmentScreenFragment"
-            android:label="RefreshmentFragment" >
+            android:label="Thức Ăn, Nước Uống" >
             <action
                 android:id="@+id/action_refreshmentScreenFragment_to_addRefreshmentScreenFragment"
                 app:destination="@id/addRefreshmentScreenFragment" />
@@ -118,11 +117,11 @@
         <fragment
             android:id="@+id/addRefreshmentScreenFragment"
             android:name="com.example.quanlyrapphim.fragments.AddRefreshmentScreenFragment"
-            android:label="AddRefreshmentFragment" />
+            android:label="Thêm Thức Ăn, Nước Uống" />
         <fragment
             android:id="@+id/editRefreshmentScreenFragment"
             android:name="com.example.quanlyrapphim.fragments.EditFreshmentScreenFragment"
-            android:label="EditRefreshmentFragment" />
+            android:label="Chỉnh Sửa Thức Ăn Kèm" />
 
     </navigation>
     <navigation android:id="@+id/timeSlotScreenGroup"
@@ -130,16 +129,23 @@
         <fragment
             android:id="@+id/timeSlotScreenFragment"
             android:name="com.example.quanlyrapphim.fragments.TimeSlotScreenFragment"
-            android:label="TimeSlotScreenFragment" >
+            android:label="Khung Thời Gian" >
 
             <action
                 android:id="@+id/action_timeSlotScreenFragment_to_addTimeSlotScreenFragment"
                 app:destination="@id/addTimeSlotScreenFragment" />
+            <action
+                android:id="@+id/action_timeSlotScreenFragment_to_editTimeSlotScreenFragment"
+                app:destination="@id/editTimeSlotScreenFragment" />
         </fragment>
         <fragment
+            android:id="@+id/editTimeSlotScreenFragment"
+            android:name="com.example.quanlyrapphim.fragments.TimeSlotEditScreenFragment"
+            android:label="Chỉnh Sửa Khung Thời Gian" />
+        <fragment
             android:id="@+id/addTimeSlotScreenFragment"
-            android:name="com.example.quanlyrapphim.fragments.AddTimeSlotScreenFragment"
-            android:label="AddTimeSlotScreenFragment" />
+            android:name="com.example.quanlyrapphim.fragments.TimeSlotAddScreenFragment"
+            android:label="Thêm Khung Thời Gian" />
     </navigation>
     <navigation
         android:id="@+id/showTimeScreenGroup"
@@ -147,7 +153,7 @@
         <fragment
             android:id="@+id/showTimeScreenFragment"
             android:name="com.example.quanlyrapphim.fragments.ShowTimeScreenFragment"
-            android:label="ShowTimeScreenFragment" >
+            android:label="Lịch chiếu" >
             <action
                 android:id="@+id/action_showTimeScreenFragment_to_addShowTimeFragmentScreen"
                 app:destination="@id/addShowTimeFragmentScreen" />
@@ -155,8 +161,40 @@
         <fragment
             android:id="@+id/addShowTimeFragmentScreen"
             android:name="com.example.quanlyrapphim.fragments.AddShowTimeFragmentScreen"
-            android:label="fragment_add_show_time_screen"
+            android:label="Thêm Lịch Chiếu"
 
             />
     </navigation>
+    <navigation
+        android:id="@+id/tempBooking"
+        app:startDestination="@id/selectMovieFragment2">
+        <fragment
+            android:id="@+id/bookingTicketFragment"
+            android:name="com.example.quanlyrapphim.fragments.BookingTicketFragment"
+            android:label="Đặt vé" >
+            <action
+                android:id="@+id/action_bookingTicketFragment_to_bookingFoodFragment"
+                app:destination="@id/bookingFoodFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/selectMovieFragment2"
+            android:name="com.example.quanlyrapphim.fragments.SelectMovieFragment"
+            android:label="Danh Sách Phim Đang Chiếu" >
+            <action
+                android:id="@+id/action_selectMovieFragment2_to_bookingTicketFragment"
+                app:destination="@id/bookingTicketFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/bookingFoodFragment"
+            android:name="com.example.quanlyrapphim.fragments.BookingFoodFragment"
+            android:label="Đặt Thức Ăn, Nước Uống" />
+    </navigation>
+    <fragment
+        android:id="@+id/statisticTicketFragment"
+        android:name="com.example.quanlyrapphim.fragments.StatisticTicketFragment"
+        android:label="Thống kê Vé" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.quanlyrapphim.fragments.ProfileFragment"
+        android:label="Thông tin cá nhân" />
 </navigation>

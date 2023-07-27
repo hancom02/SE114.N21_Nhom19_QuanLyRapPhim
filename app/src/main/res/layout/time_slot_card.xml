@@ -38,7 +38,8 @@
             android:text="11:30"
             android:textSize="14dp"
             app:layout_constraintStart_toEndOf="@id/time_slot_card_tv_space"
-            app:layout_constraintTop_toTopOf="@id/time_slot_card_tv_space" />
+            app:layout_constraintTop_toTopOf="@id/time_slot_card_tv_space"
+            />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/timeslot_card_btn_edit"

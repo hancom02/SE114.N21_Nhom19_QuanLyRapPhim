@@ -29,7 +29,7 @@ public class SelectMovieFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //initFilms();
+//        initFilms();
     }
 
     @Override

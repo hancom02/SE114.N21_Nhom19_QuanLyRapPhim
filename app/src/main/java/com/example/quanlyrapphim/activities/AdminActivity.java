@@ -23,6 +23,7 @@ import android.widget.TextView;
 
 import com.example.quanlyrapphim.R;
 import com.example.quanlyrapphim.models.Account;
+import com.example.quanlyrapphim.utils.GetCurrentAccount;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.appbar.MaterialToolbar;
@@ -40,7 +41,7 @@ import com.squareup.picasso.Picasso;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
-public class AdminActivity extends AppCompatActivity {
+public class AdminActivity extends AppCompatActivity implements GetCurrentAccount {
 
     private NavController navController;
     private BottomNavigationView bottomNavBar;
@@ -68,7 +69,7 @@ public class AdminActivity extends AppCompatActivity {
         navController = navHostFragment.getNavController();
 
         // config app bar
-        appBarConfiguration = new AppBarConfiguration.Builder(R.id.ticketScreenFragment, R.id.filmScreenFragment, R.id.staffScreenFragment, R.id.cinemaRoomScreenFragment, R.id.refreshmentScreenFragment, R.id.timeSlotScreenFragment, R.id.showTimeScreenGroup).setOpenableLayout(drawerLayout).build();
+        appBarConfiguration = new AppBarConfiguration.Builder(R.id.ticketScreenFragment, R.id.filmScreenFragment, R.id.staffScreenFragment, R.id.cinemaRoomScreenFragment, R.id.refreshmentScreenFragment, R.id.timeSlotScreenFragment, R.id.showTimeScreenGroup, R.id.tempBooking, R.id.statisticTicketFragment,R.id.profileFragment).setOpenableLayout(drawerLayout).build();
 
         // config bottom navigation bar
         NavigationUI.setupWithNavController(bottomNavBar, navController);
@@ -98,7 +99,7 @@ public class AdminActivity extends AppCompatActivity {
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
 
-                        Account account = document.toObject(Account.class);
+                        account = document.toObject(Account.class);
 
                         // set drawer infor
                         View headerView = navView.getHeaderView(0);
