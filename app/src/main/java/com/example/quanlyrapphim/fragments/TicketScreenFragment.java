@@ -82,6 +82,8 @@ public class TicketScreenFragment extends Fragment {
     Map<String, Film> filmMap = new HashMap<String, Film>();
     private ShowTimeInBookingRecyclerViewAdapter showTimeAdapter;
 
+    TextView totalPrice;
+
 
     private MaterialButton submitBtn;
 
@@ -112,6 +114,7 @@ public class TicketScreenFragment extends Fragment {
         inputDate = view.findViewById(R.id.ticket_screen_input_date);
         showTimeRecyclerView = view.findViewById(R.id.ticket_screen_show_time_recycler_view);
         submitBtn = view.findViewById(R.id.ticket_screen_submit);
+        totalPrice = view.findViewById(R.id.ticket_screen_total_price);
 
         submitBtn.setOnClickListener(v-> {
 
@@ -143,6 +146,7 @@ public class TicketScreenFragment extends Fragment {
                             Toast.makeText(getActivity(), "Đặt vé thành công!", Toast.LENGTH_SHORT).show();
 
                             // clean
+                            totalPrice.setText("");
                             onRemoveFilm();
                             showTimeUIS.clear();
                             seats.clear();
@@ -359,6 +363,15 @@ public class TicketScreenFragment extends Fragment {
                     seats.get(k).setStatus(0);
                 }
                 seatAdapter.notifyItemChanged(k);
+
+                // calc total price
+                int sum = 0;
+                for(Seat s : seats) {
+                    if(s.getStatus() == 2) {
+                        sum += selectedShowTime.price;
+                    }
+                }
+                totalPrice.setText(sum + "VNĐ");
             });
             seatRecyclerView.setAdapter(seatAdapter);
             seatRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 6));
@@ -378,6 +391,15 @@ public class TicketScreenFragment extends Fragment {
                     seats.get(k).setStatus(0);
                 }
                 seatAdapter.notifyItemChanged(k);
+
+                // calc total price
+                int sum = 0;
+                for(Seat s : seats) {
+                    if(s.getStatus() == 2) {
+                        sum += selectedShowTime.price;
+                    }
+                }
+                totalPrice.setText(sum + "VNĐ");
             });
             seatRecyclerView.setAdapter(seatAdapter);
             seatRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), selectedShowTime.seatsColumn));
