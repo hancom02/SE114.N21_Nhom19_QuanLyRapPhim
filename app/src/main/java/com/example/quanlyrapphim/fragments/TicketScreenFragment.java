@@ -23,8 +23,12 @@ import com.example.quanlyrapphim.R;
 import com.example.quanlyrapphim.adapters.FilmInBookingRecyclerViewAdapter;
 import com.example.quanlyrapphim.adapters.FilmRecyclerViewAdapter;
 import com.example.quanlyrapphim.adapters.SeatRecyclerViewAdapter;
+import com.example.quanlyrapphim.adapters.ShowTimeInBookingRecyclerViewAdapter;
+import com.example.quanlyrapphim.models.CinemaRoom;
 import com.example.quanlyrapphim.models.Film;
 import com.example.quanlyrapphim.models.Seat;
+import com.example.quanlyrapphim.models.ShowTimeUI;
+import com.example.quanlyrapphim.models.TimeSlot;
 import com.example.quanlyrapphim.utils.ConfirmDeleteDialog;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -39,14 +43,18 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.squareup.picasso.Picasso;
 
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class TicketScreenFragment extends Fragment {
 
     private ArrayList<Seat> seats = new ArrayList<>();
     private RecyclerView seatRecyclerView;
     private RecyclerView filmRecyclerView;
+    private RecyclerView showTimeRecyclerView;
     private ArrayList<Film> allFilms = new ArrayList<>();
     private LinearLayout selectedFilmGroup;
     private MaterialButton removeFilmBtn;
@@ -55,9 +63,13 @@ public class TicketScreenFragment extends Fragment {
     private Film selectedFilm;
     private TextInputEditText inputDate;
     private Date selectedDate;
+
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     private MaterialDatePicker datePicker = MaterialDatePicker.Builder.datePicker().setTitleText("Chọn ngày chiếu").build();
+
+    Map<String, TimeSlot> timeSlotMap = new HashMap<String, TimeSlot>();
+    Map<String, CinemaRoom> roomMap = new HashMap<String, CinemaRoom>();
 
 
     @Override
@@ -79,16 +91,54 @@ public class TicketScreenFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         // view
-//        seatRecyclerView = view.findViewById(R.id.ticket_screen_seat_recycler_view);
-//        SeatRecyclerViewAdapter adapter = new SeatRecyclerViewAdapter(getActivity(), seats, 10);
-//        seatRecyclerView.setAdapter(adapter);
-//        seatRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 10));
+        seatRecyclerView = view.findViewById(R.id.ticket_screen_seat_recycler_view);
+        SeatRecyclerViewAdapter adapter = new SeatRecyclerViewAdapter(getActivity(), seats, 10);
+        adapter.setOnClickListener(i -> {
+            if (seats.get(i).getStatus() == 1) {
+                return;
+            }
+            if (seats.get(i).getStatus() == 0) {
+                seats.get(i).setStatus(2);
+            }
+            else if (seats.get(i).getStatus() == 2) {
+                seats.get(i).setStatus(0);
+            }
+            adapter.notifyItemChanged(i);
+        });
+        seatRecyclerView.setAdapter(adapter);
+        seatRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 10));
+
+
+
+
         filmRecyclerView = view.findViewById(R.id.ticket_screen_film_recycler_view);
         selectedFilmGroup = view.findViewById(R.id.ticket_screen_selected_film_group);
         removeFilmBtn = view.findViewById(R.id.ticket_screen_remove_film);
         selectedFilmImage = view.findViewById(R.id.ticket_screen_selected_film_image);
         selectedFilmName = view.findViewById(R.id.ticket_screen_selected_film_name);
         inputDate = view.findViewById(R.id.ticket_screen_input_date);
+        showTimeRecyclerView = view.findViewById(R.id.ticket_screen_show_time_recycler_view);
+
+
+        ArrayList<ShowTimeUI> s = new ArrayList<>();
+        s.add(new ShowTimeUI("Film gi do", new Date(), "8h-9h", "Phong 1", 200000));
+        s.add(new ShowTimeUI("Film gi do 1", new Date(), "8h-9h", "Phong 1", 200000));
+        s.add(new ShowTimeUI("Film gi do 2", new Date(), "8h-9h", "Phong 1", 200000));
+        ShowTimeInBookingRecyclerViewAdapter showTimeAdapter = new ShowTimeInBookingRecyclerViewAdapter(getActivity(), s);
+
+
+        // set click card
+        showTimeAdapter.setOnClickListener(i -> {
+            ///
+
+        });
+
+        // set adapter
+        showTimeRecyclerView.setAdapter(showTimeAdapter);
+        LinearLayoutManager layoutManagerShowTime
+                = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+        showTimeRecyclerView.setLayoutManager(layoutManagerShowTime);
+
 
         // Show date picker
         inputDate.setOnClickListener(v -> {
@@ -142,6 +192,47 @@ public class TicketScreenFragment extends Fragment {
                             LinearLayoutManager layoutManager
                                     = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
                             filmRecyclerView.setLayoutManager(layoutManager);
+
+                        } else {
+                            Log.d("GET_FILM", "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
+
+
+        // Get timeSlot from db
+        db.collection("timeSlots")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            timeSlotMap = new HashMap<String, TimeSlot>();
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                //Log.d("GET_FILM", document.getId() + " => " + document.getData());
+                                TimeSlot timeSlot = document.toObject(TimeSlot.class);
+                                timeSlotMap.put(document.getId(), timeSlot);
+                            }
+
+                        } else {
+                            Log.d("GET_FILM", "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
+
+        // Get CinemaRoom from db
+        db.collection("theaters")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            roomMap = new HashMap<String, CinemaRoom>();
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                //Log.d("GET_FILM", document.getId() + " => " + document.getData());
+                                CinemaRoom room = document.toObject(CinemaRoom.class);
+                                roomMap.put(document.getId(), room);
+                            }
 
                         } else {
                             Log.d("GET_FILM", "Error getting documents: ", task.getException());

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="120dp"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:clickable="true"
+    android:layout_marginHorizontal="4dp"
+
+    android:layout_marginBottom="18dp">
+    <LinearLayout
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:text="Example name of film"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:padding="2dp"
+            android:id="@+id/show_time_card_in_booking_film"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="12/3/2023"
+            android:ellipsize="end"
+            android:padding="2dp"
+            android:id="@+id/show_time_card_in_booking_date"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="8h-9h"
+            android:ellipsize="end"
+            android:padding="2dp"
+            android:id="@+id/show_time_card_in_booking_time"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Phòng chiếu 1"
+            android:ellipsize="end"
+            android:padding="2dp"
+            android:id="@+id/show_time_card_in_booking_theater"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="200000"
+            android:ellipsize="end"
+            android:padding="2dp"
+            android:id="@+id/show_time_card_in_booking_price"/>
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>
