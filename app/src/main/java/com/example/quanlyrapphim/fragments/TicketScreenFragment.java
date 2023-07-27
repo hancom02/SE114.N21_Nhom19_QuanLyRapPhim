@@ -85,7 +85,6 @@ public class TicketScreenFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        initSeats();
     }
 
     @Override
@@ -110,28 +109,13 @@ public class TicketScreenFragment extends Fragment {
         inputDate = view.findViewById(R.id.ticket_screen_input_date);
         showTimeRecyclerView = view.findViewById(R.id.ticket_screen_show_time_recycler_view);
 
-        seatAdapter = new SeatRecyclerViewAdapter(getActivity(), seats, 10);
-        seatAdapter.setOnClickListener(i -> {
-            if (seats.get(i).getStatus() == 1) {
-                return;
-            }
-            if (seats.get(i).getStatus() == 0) {
-                seats.get(i).setStatus(2);
-            }
-            else if (seats.get(i).getStatus() == 2) {
-                seats.get(i).setStatus(0);
-            }
-            seatAdapter.notifyItemChanged(i);
-        });
-        seatRecyclerView.setAdapter(seatAdapter);
-        seatRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 10));
+
 
 
         showTimeAdapter = new ShowTimeInBookingRecyclerViewAdapter(getActivity(), showTimeUIS);
         // set click card
         showTimeAdapter.setOnClickListener(i -> {
-            ///
-
+            onSelectShowTime(i);
         });
         // set adapter
         showTimeRecyclerView.setAdapter(showTimeAdapter);
@@ -277,16 +261,63 @@ public class TicketScreenFragment extends Fragment {
         showTimeAdapter.notifyDataSetChanged();
     }
 
+    void onSelectShowTime(int i) {
+        for(int j = 0; j < showTimeUIS.size(); j++) {
+            showTimeUIS.get(j).isSelected = false;
+        }
+        showTimeUIS.get(i).isSelected = true;
+        showTimeAdapter.notifyDataSetChanged();
+
+
+        selectedShowTime = showTimes.get(i);
+        seats.clear();
+        if (selectedShowTime.seats == null) {
+            for (int j = 0; j < 24; j++) {
+                seats.add(new Seat(0));
+            }
+
+            seatAdapter = new SeatRecyclerViewAdapter(getActivity(), seats, 6);
+            seatAdapter.setOnClickListener(k -> {
+                if (seats.get(k).getStatus() == 1) {
+                    return;
+                }
+                if (seats.get(k).getStatus() == 0) {
+                    seats.get(k).setStatus(2);
+                }
+                else if (seats.get(k).getStatus() == 2) {
+                    seats.get(k).setStatus(0);
+                }
+                seatAdapter.notifyItemChanged(k);
+            });
+            seatRecyclerView.setAdapter(seatAdapter);
+            seatRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 6));
+        } else {
+            for (int j = 0; j < selectedShowTime.seats.size(); j++) {
+                seats.add(new Seat(selectedShowTime.seats.get(j)));
+            }
+            seatAdapter = new SeatRecyclerViewAdapter(getActivity(), seats, selectedShowTime.seatsColumn);
+            seatAdapter.setOnClickListener(k -> {
+                if (seats.get(k).getStatus() == 1) {
+                    return;
+                }
+                if (seats.get(k).getStatus() == 0) {
+                    seats.get(k).setStatus(2);
+                }
+                else if (seats.get(k).getStatus() == 2) {
+                    seats.get(k).setStatus(0);
+                }
+                seatAdapter.notifyItemChanged(k);
+            });
+            seatRecyclerView.setAdapter(seatAdapter);
+            seatRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), selectedShowTime.seatsColumn));
+        }
+    }
+
     void onRemoveFilm() {
         selectedFilm = null;
         filmRecyclerView.setVisibility(View.VISIBLE);
         selectedFilmGroup.setVisibility(View.GONE);
     }
 
-    void initSeats() {
-        for (int i = 0; i < 50; i++) {
-            seats.add(new Seat(i % 3));
-        }
-    }
 
 }

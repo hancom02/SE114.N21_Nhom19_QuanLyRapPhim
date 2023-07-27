@@ -2,6 +2,8 @@ package com.example.quanlyrapphim.adapters;
 
 
 import android.content.Context;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +17,7 @@ import com.example.quanlyrapphim.R;
 import com.example.quanlyrapphim.models.Film;
 import com.example.quanlyrapphim.models.ShowTimeUI;
 import com.example.quanlyrapphim.utils.RecyclerViewItemEventListener;
+import com.google.android.material.card.MaterialCardView;
 import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
@@ -48,6 +51,9 @@ public class ShowTimeInBookingRecyclerViewAdapter extends RecyclerView.Adapter<S
         holder.time.setText(showtimes.get(i).time);
         holder.theater.setText(showtimes.get(i).theaterName);
         holder.price.setText(showtimes.get(i).price + "");
+        if (showtimes.get(i).isSelected) {
+            holder.card.setCardBackgroundColor(ColorStateList.valueOf(Color.parseColor("#ffffaa")));
+        }
         holder.card.setOnClickListener(view -> {
             clickListener.onItemEvent(i);
         });
@@ -68,7 +74,7 @@ public class ShowTimeInBookingRecyclerViewAdapter extends RecyclerView.Adapter<S
         TextView time;
         TextView theater;
         TextView price;
-        View card;
+        MaterialCardView card;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -77,7 +83,7 @@ public class ShowTimeInBookingRecyclerViewAdapter extends RecyclerView.Adapter<S
             time = itemView.findViewById(R.id.show_time_card_in_booking_time);
             theater = itemView.findViewById(R.id.show_time_card_in_booking_theater);
             price = itemView.findViewById(R.id.show_time_card_in_booking_price);
-            card = itemView;
+            card = (MaterialCardView)itemView;
         }
     }
 
