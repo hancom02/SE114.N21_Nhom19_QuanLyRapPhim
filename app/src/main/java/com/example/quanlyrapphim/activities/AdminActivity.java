@@ -53,10 +53,18 @@ public class AdminActivity extends AppCompatActivity implements GetCurrentAccoun
     private Account account;
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin);
+
+        // get account id
+        Intent intent = getIntent();
+        String accountId = intent.getStringExtra("accountId");
+        String role = intent.getStringExtra("accountRole");
+
+
 
         // find ui
         toolbar = findViewById(R.id.toolbar);
@@ -69,7 +77,11 @@ public class AdminActivity extends AppCompatActivity implements GetCurrentAccoun
         navController = navHostFragment.getNavController();
 
         // config app bar
-        appBarConfiguration = new AppBarConfiguration.Builder(R.id.ticketScreenFragment, R.id.filmScreenFragment, R.id.staffScreenFragment, R.id.cinemaRoomScreenFragment, R.id.refreshmentScreenFragment, R.id.timeSlotScreenFragment, R.id.showTimeScreenGroup, R.id.tempBooking, R.id.statisticTicketFragment,R.id.profileFragment).setOpenableLayout(drawerLayout).build();
+        if (role.equals("staff")) {
+            appBarConfiguration = new AppBarConfiguration.Builder(R.id.ticketScreenFragment, R.id.filmScreenFragment, R.id.refreshmentScreenFragment, R.id.tempBooking, R.id.profileFragment).setOpenableLayout(drawerLayout).build();
+        } else {
+            appBarConfiguration = new AppBarConfiguration.Builder(R.id.ticketScreenFragment, R.id.filmScreenFragment, R.id.staffScreenFragment, R.id.cinemaRoomScreenFragment, R.id.refreshmentScreenFragment, R.id.timeSlotScreenFragment, R.id.showTimeScreenGroup, R.id.tempBooking, R.id.statisticTicketFragment, R.id.profileFragment).setOpenableLayout(drawerLayout).build();
+        }
 
         // config bottom navigation bar
         NavigationUI.setupWithNavController(bottomNavBar, navController);
@@ -81,13 +93,10 @@ public class AdminActivity extends AppCompatActivity implements GetCurrentAccoun
         NavigationUI.setupWithNavController(navView, navController);
 
 
-        // get account id
-        Intent intent = getIntent();
-        String accountId = intent.getStringExtra("accountId");
-//        if (!user.equals("admin")) {
-//            bottomNavBar.getMenu().removeItem(R.id.adminFragment);
-//        }
-
+        if (role.equals("staff")) {
+            bottomNavBar.getMenu().removeItem(R.id.staffScreenGroup);
+            bottomNavBar.getMenu().removeItem(R.id.cinemaRoomScreenGroup);
+        }
         Log.i("ACCOUNT_ID", accountId);
 
         // GET ACCOUNT
@@ -116,13 +125,15 @@ public class AdminActivity extends AppCompatActivity implements GetCurrentAccoun
                             navController.navigate(R.id.filmScreenGroup);
                         });
                         MaterialButton btnLogout = (MaterialButton) headerView.findViewById(R.id.drawer_header_logout);
-                        btnLogout.setOnClickListener(v-> {
+                        btnLogout.setOnClickListener(v -> {
                             Intent intent = new Intent(AdminActivity.this, LoginActivity.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_TASK_ON_HOME);
                             startActivity(intent);
                             AdminActivity.this.finish();
                             return;
                         });
+
+
                     } else {
                         Log.d("FILM_DETAIL", "No such document");
                     }
@@ -133,6 +144,7 @@ public class AdminActivity extends AppCompatActivity implements GetCurrentAccoun
         });
 
     }
+
     @Override
     public boolean onSupportNavigateUp() {
         return NavigationUI.navigateUp(navController, appBarConfiguration) || super.onSupportNavigateUp();
@@ -142,17 +154,17 @@ public class AdminActivity extends AppCompatActivity implements GetCurrentAccoun
     public boolean dispatchTouchEvent(MotionEvent event) {
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
             View v = getCurrentFocus();
-            if ( v instanceof EditText) {
+            if (v instanceof EditText) {
                 Rect outRect = new Rect();
                 v.getGlobalVisibleRect(outRect);
-                if (!outRect.contains((int)event.getRawX(), (int)event.getRawY())) {
+                if (!outRect.contains((int) event.getRawX(), (int) event.getRawY())) {
                     v.clearFocus();
                     InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
                 }
             }
         }
-        return super.dispatchTouchEvent( event );
+        return super.dispatchTouchEvent(event);
     }
 
     public Account getAccount() {

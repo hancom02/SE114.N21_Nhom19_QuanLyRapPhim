@@ -75,6 +75,7 @@ public class LoginActivity extends AppCompatActivity {
                     Intent intent = new Intent(LoginActivity.this, AdminActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_TASK_ON_HOME);
                     intent.putExtra("accountId", account.getId());
+                    intent.putExtra("accountRole", account.getRole());
                     startActivity(intent);
                     LoginActivity.this.finish();
                     return;
