@@ -125,6 +125,13 @@
                 android:id="@+id/ticket_screen_seat_recycler_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:id="@+id/ticket_screen_submit"
+                android:text="Đặt vé"/>
         </LinearLayout>
     </ScrollView>
 

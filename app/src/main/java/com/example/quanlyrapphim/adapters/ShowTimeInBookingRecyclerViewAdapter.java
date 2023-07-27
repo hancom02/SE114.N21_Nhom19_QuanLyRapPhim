@@ -53,6 +53,8 @@ public class ShowTimeInBookingRecyclerViewAdapter extends RecyclerView.Adapter<S
         holder.price.setText(showtimes.get(i).price + "");
         if (showtimes.get(i).isSelected) {
             holder.card.setCardBackgroundColor(ColorStateList.valueOf(Color.parseColor("#ffffaa")));
+        } else {
+            holder.card.setCardBackgroundColor(ColorStateList.valueOf(Color.parseColor("#ffffff")));
         }
         holder.card.setOnClickListener(view -> {
             clickListener.onItemEvent(i);

@@ -48,6 +48,7 @@ import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class TicketScreenFragment extends Fragment {
@@ -82,6 +83,8 @@ public class TicketScreenFragment extends Fragment {
     private ShowTimeInBookingRecyclerViewAdapter showTimeAdapter;
 
 
+    private MaterialButton submitBtn;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -108,6 +111,72 @@ public class TicketScreenFragment extends Fragment {
         selectedFilmName = view.findViewById(R.id.ticket_screen_selected_film_name);
         inputDate = view.findViewById(R.id.ticket_screen_input_date);
         showTimeRecyclerView = view.findViewById(R.id.ticket_screen_show_time_recycler_view);
+        submitBtn = view.findViewById(R.id.ticket_screen_submit);
+
+        submitBtn.setOnClickListener(v-> {
+
+            if (selectedShowTime == null) {
+                return;
+            }
+
+            List<Integer> _seasts = new ArrayList<>();
+            for (Seat s: seats) {
+                if (s.getStatus() == 0) {
+                    _seasts.add(0);
+                } else {
+                    _seasts.add(1);
+                }
+            }
+
+
+            Map<String,Object> updateMap = new HashMap<>();
+            updateMap.put("seats", _seasts);
+            if (selectedShowTime.seats == null) {
+                updateMap.put("seatsColumn", 6);
+            }
+            // update seats
+            db.collection("showtimes").document(selectedShowTime.id)
+                    .update(updateMap)
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Toast.makeText(getActivity(), "Đặt vé thành công!", Toast.LENGTH_SHORT).show();
+
+                            // clean
+                            onRemoveFilm();
+                            showTimeUIS.clear();
+                            seats.clear();
+                            selectedShowTime = null;
+                            seatAdapter.notifyDataSetChanged();
+                            showTimeAdapter.notifyDataSetChanged();
+                            db.collection("showtimes")
+                                    .get()
+                                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                            if (task.isSuccessful()) {
+                                                showTimes = new ArrayList<>();
+                                                for (QueryDocumentSnapshot document : task.getResult()) {
+                                                    //Log.d("GET_FILM", document.getId() + " => " + document.getData());
+                                                    ShowTime_ showTime = document.toObject(ShowTime_.class);
+                                                    showTime.id = document.getId();
+                                                    showTimes.add(showTime);
+                                                }
+
+                                            } else {
+                                                Log.d("GET_FILM", "Error getting documents: ", task.getException());
+                                            }
+                                        }
+                                    });
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(getActivity(), "Có lỗi xảy ra!", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+        });
 
 
 
@@ -246,6 +315,8 @@ public class TicketScreenFragment extends Fragment {
                         }
                     }
                 });
+
+
 
     }
 
